@@ -35,7 +35,7 @@ class PermissionRoleTableSeeder extends Seeder
         $executive = Role::create(['id' => '4', 'name' => 'executive']);
         $executive->givePermissionTo('view_backend');
 
-        $user = Role::create(['id' => '5', 'name' => 'user']);
+        $user = Role::create(['id' => '5', 'name' => 'resident']);
     }
 
     public function CreateDefaultPermissions()

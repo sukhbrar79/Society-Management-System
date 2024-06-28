@@ -34,8 +34,17 @@ $notifications_latest = optional($notifications)->take(5);
         </li>
 
         @php
-            $module_name = "posts";
-            $text = __('Posts');
+            $module_name = "users";
+            $text = __('Residents');
+            $icon = "fa-solid fa-user-group";
+            $permission = "view_".$module_name;
+            $url = route('backend.'.$module_name.'.residents');
+        @endphp
+        <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
+       
+        @php
+            $module_name = "complaints";
+            $text = __('Residents Complaints');
             $icon = "fa-regular fa-file-lines";
             $permission = "view_".$module_name;
             $url = route('backend.'.$module_name.'.index');
@@ -43,18 +52,36 @@ $notifications_latest = optional($notifications)->take(5);
         <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
 
         @php
-            $module_name = "categories";
-            $text = __('Categories');
-            $icon = "fa-solid fa-diagram-project";
+            $module_name = "invoices";
+            $text = __('Maintenance Invoices');
+            $icon = "fa-regular fa-file-lines";
             $permission = "view_".$module_name;
             $url = route('backend.'.$module_name.'.index');
         @endphp
         <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
-        
+
         @php
-            $module_name = "tags";
-            $text = __('Tags');
-            $icon = "fa-solid fa-tags";
+            $module_name = "parkings";
+            $text = __('Parking Allocations');
+            $icon = "fa-regular fa-file-lines";
+            $permission = "view_".$module_name;
+            $url = route('backend.'.$module_name.'.index');
+        @endphp
+        <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
+
+        @php
+            $module_name = "visitors";
+            $text = __('Visitors');
+            $icon = "fa-regular fa-file-lines";
+            $permission = "view_".$module_name;
+            $url = route('backend.'.$module_name.'.index');
+        @endphp
+        <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
+
+        @php
+            $module_name = "noticeboards";
+            $text = __('Notice Board');
+            $icon = "fa-regular fa-file-lines";
             $permission = "view_".$module_name;
             $url = route('backend.'.$module_name.'.index');
         @endphp

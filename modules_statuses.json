@@ -1,5 +1,11 @@
 {
-    "Post": true,
-    "Category": true,
-    "Tag": true
+    "Post": false,
+    "Category": false,
+    "Tag": false,
+    "Complaint": true,
+    "Invoice": true,
+    "Transaction": true,
+    "Visitor": true,
+    "Parking": true,
+    "NoticeBoard": true
 }
