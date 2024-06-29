@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\HasMedia;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Modules\Block\Models\Block;
+use Modules\Flat\Models\Flat;
 
 class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
@@ -105,5 +107,15 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     public function getRolesListAttribute()
     {
         return array_map('intval', $this->roles->pluck('id')->toArray());
+    }
+
+    public function block()
+    {
+        return $this->hasOne(Block::class, 'id', 'block_id');
+    }
+
+    public function flat()
+    {
+        return $this->hasOne(Flat::class, 'id', 'block_id');
     }
 }

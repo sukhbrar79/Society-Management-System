@@ -1,0 +1,13 @@
+{
+    "name": "Flat",
+    "alias": "flat",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Flat\\Providers\\FlatServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -23,3 +23,4 @@ class Complaint extends BaseModel
         return \Modules\Complaint\database\factories\ComplaintFactory::new();
     }
 }
+

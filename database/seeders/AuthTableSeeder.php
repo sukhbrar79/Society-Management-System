@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use Database\Seeders\Auth\PermissionRoleTableSeeder;
 use Database\Seeders\Auth\UserRoleTableSeeder;
 use Database\Seeders\Auth\UserTableSeeder;
+use Modules\Block\database\seeders\BlockDatabaseSeeder;
+use Modules\Flat\database\seeders\FlatDatabaseSeeder;
+
 use Illuminate\Database\Seeder;
 
 /**
@@ -25,5 +28,8 @@ class AuthTableSeeder extends Seeder
         echo "\n Default Permissions Created. \n";
         $this->call(UserRoleTableSeeder::class);
         echo "\n Default Roles created and assigned to Users. \n";
+        $this->call(BlockDatabaseSeeder::class);
+        $this->call(FlatDatabaseSeeder::class);
+
     }
 }

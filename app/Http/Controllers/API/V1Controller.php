@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\UserResource;
+
 
 class V1Controller extends Controller
 {
@@ -54,5 +57,51 @@ class V1Controller extends Controller
         $request->user()->token()->revoke();
 
         return response()->json(['message' => 'Successfully logged out'], 200);
+    }
+
+    public function profileShow()
+    {
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Return the user profile data
+        return response()->json([
+            'success' => true,
+            'data' => new UserResource($user)
+        ]);
+    }
+
+    public function profileUpdate(Request $request)
+    {
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Define validation rules
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            // Add other fields as necessary
+        ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        // Update the user profile
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        // Update other fields as necessary
+        $user->save();
+
+        // Return success response
+        return response()->json([
+            'success' => true,
+            'message' => 'Profile updated successfully',
+            'data' => new UserResource($user)
+        ]);
     }
 }

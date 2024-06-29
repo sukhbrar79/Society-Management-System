@@ -34,6 +34,24 @@ $notifications_latest = optional($notifications)->take(5);
         </li>
 
         @php
+            $module_name = "blocks";
+            $text = __('Blocks');
+            $icon = "fa-solid fa-user-group";
+            $permission = "view_".$module_name;
+            $url = route('backend.'.$module_name.'.index');
+        @endphp
+        <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
+
+        @php
+            $module_name = "flats";
+            $text = __('Flats');
+            $icon = "fa-solid fa-user-group";
+            $permission = "view_".$module_name;
+            $url = route('backend.'.$module_name.'.index');
+        @endphp
+        <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
+
+        @php
             $module_name = "users";
             $text = __('Residents');
             $icon = "fa-solid fa-user-group";

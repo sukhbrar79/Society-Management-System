@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use Modules\Complaint\Http\Controllers\API\ComplaintsController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/complaints', function (Request $request) {
-    return $request->user();
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('/complaints', [ComplaintsController::class, 'index']);
+    Route::post('/complaints', [ComplaintsController::class, 'store']);
+    Route::put('/complaints/{id}', [ComplaintsController::class, 'update']);
+    Route::delete('/complaints/{id}', [ComplaintsController::class, 'destroy']);
 });

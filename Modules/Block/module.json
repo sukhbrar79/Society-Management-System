@@ -1,0 +1,13 @@
+{
+    "name": "Block",
+    "alias": "block",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Block\\Providers\\BlockServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

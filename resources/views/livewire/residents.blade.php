@@ -10,6 +10,8 @@
                             <th>{{ __('labels.backend.users.fields.name') }}</th>
                             <th>{{ __('labels.backend.users.fields.email') }}</th>
                             <th>{{ __('labels.backend.users.fields.mobile') }}</th>
+                            <th>{{ __('labels.backend.users.fields.flat') }}</th>
+                            <th>{{ __('labels.backend.users.fields.block') }}</th>
                             <th>{{ __('labels.backend.users.fields.status') }}</th>
 
                             <th class="text-end">{{ __('labels.backend.action') }}</th>
@@ -27,6 +29,8 @@
                                 </td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->mobile??'-' }}</td>
+                                <td>{{ $user->flat->name??'-' }}</td>
+                                <td>{{ $user->block->name??'-' }}</td>
                                 <td>
                                     {!! $user->status_label !!}
                                     {!! $user->confirmed_label !!}

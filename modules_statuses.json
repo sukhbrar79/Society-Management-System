@@ -7,5 +7,7 @@
     "Transaction": true,
     "Visitor": true,
     "Parking": true,
-    "NoticeBoard": true
+    "NoticeBoard": true,
+    "Block": true,
+    "Flat": true
 }
