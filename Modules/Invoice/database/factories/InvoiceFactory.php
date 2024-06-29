@@ -25,12 +25,16 @@ class InvoiceFactory extends Factory
     public function definition()
     {
         return [
-            'name'              => substr($this->faker->text(15), 0, -1),
-            'slug'              => '',
-            'description'       => $this->faker->paragraph,
-            'status'            => 1,
-            'created_at'        => Carbon::now(),
-            'updated_at'        => Carbon::now(),
+            'invoice_number' => $this->faker->unique()->numerify('INV####'), // Example format for invoice number
+            'resident_id' => \App\Models\User::factory(), // Assuming you have a Resident model and factory
+            'amount' => $this->faker->randomFloat(2, 50, 1000), // Random amount between 50 and 1000 with 2 decimal places
+            'invoice_date' => $this->faker->date(),
+            'due_date' => $this->faker->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
+            'status' => $this->faker->randomElement(['Pending', 'Paid', 'Overdue']),
+            'created_by' => \App\Models\User::factory(), // Assuming you have a User model and factory
+            'updated_by' => \App\Models\User::factory(), // Assuming you have a User model and factory
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

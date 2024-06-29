@@ -52,7 +52,22 @@
                                 #
                             </th>
                             <th>
-                                @lang("invoice::text.name")
+                                @lang("invoice::text.invoice_number")
+                            </th>
+                            <th>
+                                @lang("invoice::text.user")
+                            </th>
+                            <th>
+                                @lang("invoice::text.amount")
+                            </th>
+                            <th>
+                                @lang("invoice::text.invoice_date")
+                            </th>
+                            <th>
+                                @lang("invoice::text.due_date")
+                            </th>
+                            <th>
+                                @lang("invoice::text.status")
                             </th>
                             <th>
                                 @lang("invoice::text.updated_at")
@@ -104,8 +119,28 @@
                 name: 'id'
             },
             {
-                data: 'name',
-                name: 'name'
+                data: 'invoice_number',
+                name: 'invoice_number'
+            },
+            {
+                data: 'resident_id',
+                name: 'resident_id'
+            },
+            {
+                data: 'amount',
+                name: 'amount'
+            },
+            {
+                data: 'invoice_date',
+                name: 'invoice_date'
+            },
+            {
+                data: 'due_date',
+                name: 'due_date'
+            },
+            {
+                data: 'status',
+                name: 'status'
             },
             {
                 data: 'updated_at',

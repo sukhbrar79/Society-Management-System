@@ -2,9 +2,11 @@
 
 return [
 
-    'name' => 'Name',
-    'slug' => 'Slug',
-    'description' => 'Description',
+    'invoice_number' => 'Invoice Number',
+    'user' => 'Resident',
+    'amount' => 'Amount',
+    'invoice_date' => 'Invoice Date',
+    'due_date' => 'Due Date',
     'status' => 'Status',
     'created_by' => 'Created By',
     'updated_at' => 'Updated At',

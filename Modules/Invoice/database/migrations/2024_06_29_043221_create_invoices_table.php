@@ -14,19 +14,23 @@ return new class extends Migration
     public function up()
     {
         Schema::create('invoices', function (Blueprint $table) {
-            $table->id();
 
-            $table->string('name');
-            $table->string('slug')->nullable();
-            $table->text('description')->nullable();
-            $table->tinyInteger('status')->default(1);
-
+            $table->bigIncrements('id');
+            $table->string('invoice_number', 50);
+            $table->unsignedBigInteger('resident_id');
+            $table->decimal('amount', 10, 2);
+            $table->date('invoice_date');
+            $table->date('due_date');
+            $table->enum('status', ['Pending', 'Paid', 'Overdue'])->default('Pending');
+           
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->integer('deleted_by')->unsigned()->nullable();
 
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('resident_id')->references('id')->on('users');
         });
     }
 
@@ -37,6 +41,11 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('invoices', function (Blueprint $table) {
+            if (Schema::hasTable('invoices')) {
+                $table->dropForeign('invoices_resident_id_foreign');
+            }
+        });
         Schema::dropIfExists('invoices');
     }
 };
