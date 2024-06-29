@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Complaint\Http\Resources;
+namespace Modules\Parking\Http\Resources;
 
 use Illuminate\Http\Request;
-use Modules\Complaint\Http\Resources\ComplaintResource;
+use Modules\Parking\Http\Resources\ParkingResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ComplaintCollection extends ResourceCollection
+class ParkingCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.

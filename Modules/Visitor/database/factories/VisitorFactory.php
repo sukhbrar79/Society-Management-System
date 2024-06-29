@@ -24,13 +24,26 @@ class VisitorFactory extends Factory
      */
     public function definition()
     {
+        $blockIds = \Modules\Block\Models\Block::pluck('id')->toArray();
+        $flatIds = \Modules\Flat\Models\Flat::pluck('id')->toArray();
+        $userIds = \App\Models\User::pluck('id')->toArray();
+
         return [
-            'name'              => substr($this->faker->text(15), 0, -1),
-            'slug'              => '',
-            'description'       => $this->faker->paragraph,
-            'status'            => 1,
-            'created_at'        => Carbon::now(),
-            'updated_at'        => Carbon::now(),
+            'name' => $this->faker->name,
+            'contact_number' => $this->faker->phoneNumber,
+            'purpose' => $this->faker->sentence,
+            'vehicle_number' => strtoupper($this->faker->bothify('??## ???')),
+            'block_id' => $this->faker->randomElement($blockIds),
+            'flat_id' => $this->faker->randomElement($flatIds), // Example range for floor
+            'resident_id' => $this->faker->randomElement($userIds), // Example range for floor
+            'created_by' => null, // Adjust as needed
+            'updated_by' => null, // Adjust as needed
+            'deleted_by' => null, // Adjust as needed
+            'check_in_time' => Carbon::now(),
+            'check_out_time' => Carbon::now()->addHours(rand(1, 5)),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null,
         ];
     }
 }

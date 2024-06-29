@@ -80,12 +80,30 @@ $notifications_latest = optional($notifications)->take(5);
 
         @php
             $module_name = "parkings";
-            $text = __('Parking Allocations');
             $icon = "fa-regular fa-file-lines";
             $permission = "view_".$module_name;
             $url = route('backend.'.$module_name.'.index');
         @endphp
-        <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
+
+        @can($permission)
+        <li class="nav-group" aria-expanded="true">
+            <a class="nav-link nav-group-toggle" href="#">
+                <i class="nav-icon {{$icon}}"></i>&nbsp;@lang('Parkings')
+            </a>
+            <ul class="nav-group-items compact" style="height: auto;">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('backend.'.$module_name.'.index') }}">
+                        <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Parking Allocations
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('backend.parking_requests.index') }}">
+                        <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Parking Requests
+                    </a>
+                </li>
+            </ul>
+        </li>
+        @endcan
 
         @php
             $module_name = "visitors";

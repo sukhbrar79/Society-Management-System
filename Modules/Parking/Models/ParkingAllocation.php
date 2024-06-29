@@ -1,20 +1,18 @@
 <?php
 
-namespace Modules\Visitor\Models;
+namespace Modules\Parking\Models;
 
 use App\Models\BaseModel;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\User;
-use Modules\Block\Models\Block;
-use Modules\Flat\Models\Flat;
 
-class Visitor extends BaseModel
+class ParkingAllocation extends BaseModel
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'visitors';
+    protected $table = 'parking_allocations';
 
     /**
      * Create a new factory instance for the model.
@@ -23,17 +21,7 @@ class Visitor extends BaseModel
      */
     protected static function newFactory()
     {
-        return \Modules\Visitor\database\factories\VisitorFactory::new();
-    }
-
-    public function block()
-    {
-        return $this->hasOne(Block::class, 'id', 'block_id');
-    }
-
-    public function flat()
-    {
-        return $this->hasOne(Flat::class, 'id', 'block_id');
+        return \Modules\Parking\database\factories\ParkingAllocationFactory::new();
     }
 
     public function user()

@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Complaint\Http\Resources;
+namespace Modules\Visitor\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ComplaintResource extends JsonResource
+class VisitorResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -16,12 +16,14 @@ class ComplaintResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'subject' => $this->subject,
-            'description' => $this->description,
-            'status' => $this->status,
-            'priority' => $this->priority,
+            'name' => $this->name,
+            'contact_number' => $this->contact_number,
+            'purpose' => $this->purpose,
+            'vehicle_number' => $this->vehicle_number,
             'block_id' => $this->block->name,
             'flat_id' => $this->flat->name,
+            'check_in_time' => $this->check_in_time,
+            'check_out_time' => $this->check_out_time,
         ];
     }
 }

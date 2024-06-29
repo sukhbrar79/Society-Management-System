@@ -52,37 +52,28 @@
                                 #
                             </th>
                             <th>
-                                @lang("visitor::text.name")
+                                @lang("parking::text.spot_number")
                             </th>
                             <th>
-                                @lang("visitor::text.contact_number")
+                                @lang("parking::text.spot_type")
                             </th>
                             <th>
-                                @lang("visitor::text.resident")
+                                @lang("parking::text.location")
                             </th>
                             <th>
-                                @lang("visitor::text.block")
+                                @lang("parking::text.resident")
                             </th>
                             <th>
-                                @lang("visitor::text.flat")
+                                @lang("parking::text.allocation_date")
                             </th>
                             <th>
-                                @lang("visitor::text.check_in_time")
+                                @lang("parking::text.expiration_date")
                             </th>
                             <th>
-                                @lang("visitor::text.check_out_time")
-                            </th>
-                            <th>
-                                @lang("visitor::text.purpose")
-                            </th>
-                            <th>
-                                @lang("visitor::text.vehicle_number")
-                            </th>	
-                            <th>
-                                @lang("visitor::text.updated_at")
+                                @lang("parking::text.updated_at")
                             </th>
                             <th class="text-end">
-                                @lang("visitor::text.action")
+                                @lang("parking::text.action")
                             </th>
                         </tr>
                     </thead>
@@ -122,46 +113,29 @@
         processing: true,
         serverSide: true,
         responsive: true,
-        ajax: '{{ route("backend.$module_name.index_data") }}',
+        ajax: '{{ route("backend.$module_name_sub.index_data") }}',
         columns: [{
                 data: 'id',
                 name: 'id'
             },
             {
-                data: 'name',
-                name: 'name'
-            },
-            {
-                data: 'contact_number',
-                name: 'contact_number'
-            },
-            {
-                data: 'resident_id',
-                name: 'resident_id'
-            },
-            {
-                data: 'block_id',
-                name: 'block_id'
-            },
-            {
-                data: 'flat_id',
-                name: 'flat_id'
-            },
-            {
-                data: 'check_in_time',
-                name: 'check_in_time'
-            },
-            {
-                data: 'check_out_time',
-                name: 'check_out_time'
-            },
-            {
-                data: 'purpose',
-                name: 'purpose'
-            },
-            {
-                data: 'vehicle_number',
-                name: 'vehicle_number'
+                data: 'spot_number',
+                name: 'spot_number'
+            },{
+                data: 'spot_type',
+                name: 'spot_type'
+            },{
+                data: 'location',
+                name: 'location'
+            },{
+                data: 'resident',
+                name: 'resident'
+            },{
+                data: 'allocation_date',
+                name: 'allocation_date'
+            },{
+                data: 'expiration_date',
+                name: 'expiration_date'
             },
             {
                 data: 'updated_at',

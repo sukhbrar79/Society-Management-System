@@ -2,9 +2,12 @@
 
 return [
 
-    'name' => 'Name',
+    'user' => 'Resident',
+    'subject' => 'Subject',
     'slug' => 'Slug',
     'description' => 'Description',
+    'flat' => 'Flat',
+    'block' => 'Block',
     'status' => 'Status',
     'created_by' => 'Created By',
     'updated_at' => 'Updated At',

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Modules\Visitor\Http\Controllers\API\VisitorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/visitors', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function () {
+    Route::get('/visitors', [VisitorController::class, 'index']);
+    Route::post('/visitors', [VisitorController::class, 'store']);
+    Route::put('/visitors/{id}', [VisitorController::class, 'update']);
+    Route::delete('/visitors/{id}', [VisitorController::class, 'destroy']);
 });

@@ -1,22 +1,23 @@
 <?php
 
-namespace Modules\Complaint\Http\Controllers\API;
+namespace Modules\Visitor\Http\Controllers\API;
 
 use App\Authorizable;
 use App\Http\Controllers\Controller;
-use Modules\Complaint\Models\Complaint;
-use Modules\Complaint\Http\Resources\ComplaintResource;
-use Modules\Complaint\Http\Resources\ComplaintCollection;
+use Modules\Visitor\Models\Visitor;
+use Modules\Visitor\Http\Resources\VisitorResource;
+use Modules\Visitor\Http\Resources\VisitorCollection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
-class ComplaintsController extends Controller
+class VisitorController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Complaint::query();
-        $query->where('user_id', Auth::id());
+        $query = Visitor::query();
+        $query->where('resident_id', Auth::id());
+
         // Apply filters if provided in the request
         if ($request->has('status')) {
             $query->where('status', $request->status);
@@ -28,9 +29,9 @@ class ComplaintsController extends Controller
 
         // You can add more filters based on your requirements
 
-        $complaints = $query->paginate(10); // Adjust pagination as per your needs
+        $visitors = $query->paginate(10); // Adjust pagination as per your needs
 
-        return response()->json(ComplaintResource::collection($complaints), 200);
+        return response()->json(new VisitorCollection($visitors), 200);
     }
 
     public function store(Request $request)
@@ -47,12 +48,9 @@ class ComplaintsController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $complaint = Complaint::create(array_merge(
-            $request->all(),
-            ['created_by' => Auth::id(),'user_id' => Auth::id(),'status'=>'pending']
-        ));
+        $visitor = Visitor::create(array_merge($request->all(), ['created_by' => Auth::id(), 'user_id' => Auth::id(),'status'=>'pending']));
 
-        return response()->json(['data' => new ComplaintResource($complaint)], 201);
+        return response()->json(['data' => new VisitorResource($visitor)], 201);
     }
 
     public function update(Request $request, $id)
@@ -62,6 +60,7 @@ class ComplaintsController extends Controller
             'flat_id' => 'nullable|exists:flats,id',
             'subject' => 'nullable|string|max:125',
             'description' => 'nullable|string',
+            'status' => 'required|in:pending,in_progress,resolved,closed',
             'priority' => 'required|in:low,medium,high',
         ]);
 
@@ -69,22 +68,18 @@ class ComplaintsController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $complaint = Complaint::findOrFail($id);
-        $complaint->update(array_merge(
-            $request->all(),
-            ['updated_by' => Auth::id(),'user_id' => Auth::id()]
-        ));
+        $visitor = Visitor::findOrFail($id);
+        $visitor->update(array_merge($request->all(), ['updated_by' => Auth::id(), 'user_id' => Auth::id()]));
 
-        return response()->json(['data' => new ComplaintResource($complaint)], 200);
+        return response()->json(['data' => new VisitorResource($visitor)], 200);
     }
 
     public function destroy($id)
     {
-        $complaint = Complaint::findOrFail($id);
-        $complaint->update(['deleted_by' => Auth::id()]);
-        $complaint->delete();
+        $visitor = Visitor::findOrFail($id);
+        $visitor->update(['deleted_by' => Auth::id()]);
+        $visitor->delete();
 
-        return response()->json(['message' => 'Complaint deleted successfully'], 200);
+        return response()->json(['message' => 'Visitor deleted successfully'], 200);
     }
-
 }

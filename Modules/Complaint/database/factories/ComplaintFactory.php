@@ -24,13 +24,24 @@ class ComplaintFactory extends Factory
      */
     public function definition()
     {
+        $blockIds = \Modules\Block\Models\Block::pluck('id')->toArray();
+        $flatIds = \Modules\Flat\Models\Flat::pluck('id')->toArray();
+        $userIds = \App\Models\User::pluck('id')->toArray();
+
         return [
-            'name'              => substr($this->faker->text(15), 0, -1),
-            'slug'              => '',
-            'description'       => $this->faker->paragraph,
-            'status'            => 1,
-            'created_at'        => Carbon::now(),
-            'updated_at'        => Carbon::now(),
+            'subject' => $this->faker->name,
+            'description' => $this->faker->paragraph,
+            'status' => $this->faker->randomElement(['pending','in_progress','resolved','closed']), // Adjust as needed
+            'priority' => $this->faker->randomElement(['low','medium','high']), // Adjust as needed
+            'block_id' => $this->faker->randomElement($blockIds),
+            'flat_id' => $this->faker->randomElement($flatIds), // Example range for floor
+            'user_id' => $this->faker->randomElement($userIds), // Example range for floor
+            'created_by' => null, // Adjust as needed
+            'updated_by' => null, // Adjust as needed
+            'deleted_by' => null, // Adjust as needed
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null,
         ];
     }
 }

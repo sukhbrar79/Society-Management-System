@@ -52,7 +52,22 @@
                                 #
                             </th>
                             <th>
-                                @lang("parking::text.name")
+                                @lang("parking::text.spot_number")
+                            </th>
+                            <th>
+                                @lang("parking::text.spot_type")
+                            </th>
+                            <th>
+                                @lang("parking::text.location")
+                            </th>
+                            <th>
+                                @lang("parking::text.resident")
+                            </th>
+                            <th>
+                                @lang("parking::text.allocation_date")
+                            </th>
+                            <th>
+                                @lang("parking::text.expiration_date")
                             </th>
                             <th>
                                 @lang("parking::text.updated_at")
@@ -104,8 +119,23 @@
                 name: 'id'
             },
             {
-                data: 'name',
-                name: 'name'
+                data: 'spot_number',
+                name: 'spot_number'
+            },{
+                data: 'spot_type',
+                name: 'spot_type'
+            },{
+                data: 'location',
+                name: 'location'
+            },{
+                data: 'resident',
+                name: 'resident'
+            },{
+                data: 'allocation_date',
+                name: 'allocation_date'
+            },{
+                data: 'expiration_date',
+                name: 'expiration_date'
             },
             {
                 data: 'updated_at',

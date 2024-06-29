@@ -61,4 +61,13 @@ Route::group(['namespace' => '\Modules\Parking\Http\Controllers\Backend', 'as' =
     Route::get("$module_name/trashed", ['as' => "$module_name.trashed", 'uses' => "$controller_name@trashed"]);
     Route::patch("$module_name/trashed/{id}", ['as' => "$module_name.restore", 'uses' => "$controller_name@restore"]);
     Route::resource("$module_name", "$controller_name");
+
+    $parking_requests_module = 'parking_requests';
+    $parking_requests_controller = 'ParkingRequestsController';
+    Route::get("$parking_requests_module/index_list", ['as' => "$parking_requests_module.index_list", 'uses' => "$parking_requests_controller@index_list"]);
+    Route::get("$parking_requests_module/index_data", ['as' => "$parking_requests_module.index_data", 'uses' => "$parking_requests_controller@index_data"]);
+    Route::get("$parking_requests_module/trashed", ['as' => "$parking_requests_module.trashed", 'uses' => "$parking_requests_controller@trashed"]);
+    Route::patch("$parking_requests_module/trashed/{id}", ['as' => "$parking_requests_module.restore", 'uses' => "$parking_requests_controller@restore"]);
+    Route::resource("$parking_requests_module", "$parking_requests_controller");
+
 });

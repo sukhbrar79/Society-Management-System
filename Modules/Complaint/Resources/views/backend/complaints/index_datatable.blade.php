@@ -52,7 +52,22 @@
                                 #
                             </th>
                             <th>
-                                @lang("complaint::text.name")
+                                @lang("complaint::text.user")
+                            </th>
+                            <th>
+                                @lang("complaint::text.block")
+                            </th>
+                            <th>
+                                @lang("complaint::text.flat")
+                            </th>
+                            <th>
+                                @lang("complaint::text.subject")
+                            </th>
+                            <th>
+                                @lang("complaint::text.description")
+                            </th>
+                            <th>
+                                @lang("complaint::text.status")
                             </th>
                             <th>
                                 @lang("complaint::text.updated_at")
@@ -104,8 +119,28 @@
                 name: 'id'
             },
             {
-                data: 'name',
-                name: 'name'
+                data: 'user_id',
+                name: 'user_id'
+            },
+            {
+                data: 'block_id',
+                name: 'block_id'
+            },
+            {
+                data: 'flat_id',
+                name: 'flat_id'
+            },
+            {
+                data: 'subject',
+                name: 'subject'
+            },
+            {
+                data: 'description',
+                name: 'description'
+            },
+            {
+                data: 'status',
+                name: 'status'
             },
             {
                 data: 'updated_at',

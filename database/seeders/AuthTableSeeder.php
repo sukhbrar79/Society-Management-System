@@ -7,6 +7,9 @@ use Database\Seeders\Auth\UserRoleTableSeeder;
 use Database\Seeders\Auth\UserTableSeeder;
 use Modules\Block\database\seeders\BlockDatabaseSeeder;
 use Modules\Flat\database\seeders\FlatDatabaseSeeder;
+use Modules\Complaint\database\seeders\ComplaintDatabaseSeeder;
+use Modules\Visitor\database\seeders\VisitorDatabaseSeeder;
+use Modules\Parking\database\seeders\ParkingDatabaseSeeder;
 
 use Illuminate\Database\Seeder;
 
@@ -30,6 +33,9 @@ class AuthTableSeeder extends Seeder
         echo "\n Default Roles created and assigned to Users. \n";
         $this->call(BlockDatabaseSeeder::class);
         $this->call(FlatDatabaseSeeder::class);
+        $this->call(ComplaintDatabaseSeeder::class);
+        $this->call(VisitorDatabaseSeeder::class);
+        $this->call(ParkingDatabaseSeeder::class);
 
     }
 }

@@ -1,21 +1,21 @@
 <?php
 
-namespace Modules\Complaint\Http\Controllers\API;
+namespace Modules\Parking\Http\Controllers\API;
 
 use App\Authorizable;
 use App\Http\Controllers\Controller;
-use Modules\Complaint\Models\Complaint;
-use Modules\Complaint\Http\Resources\ComplaintResource;
-use Modules\Complaint\Http\Resources\ComplaintCollection;
+use Modules\Parking\Models\Parking;
+use Modules\Parking\Http\Resources\ParkingResource;
+use Modules\Parking\Http\Resources\ParkingCollection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
-class ComplaintsController extends Controller
+class ParkingController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Complaint::query();
+        $query = Parking::query();
         $query->where('user_id', Auth::id());
         // Apply filters if provided in the request
         if ($request->has('status')) {
@@ -30,7 +30,7 @@ class ComplaintsController extends Controller
 
         $complaints = $query->paginate(10); // Adjust pagination as per your needs
 
-        return response()->json(ComplaintResource::collection($complaints), 200);
+        return response()->json(ParkingResource::collection($complaints), 200);
     }
 
     public function store(Request $request)
@@ -47,12 +47,12 @@ class ComplaintsController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $complaint = Complaint::create(array_merge(
+        $complaint = Parking::create(array_merge(
             $request->all(),
             ['created_by' => Auth::id(),'user_id' => Auth::id(),'status'=>'pending']
         ));
 
-        return response()->json(['data' => new ComplaintResource($complaint)], 201);
+        return response()->json(['data' => new ParkingResource($complaint)], 201);
     }
 
     public function update(Request $request, $id)
@@ -69,22 +69,22 @@ class ComplaintsController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $complaint = Complaint::findOrFail($id);
+        $complaint = Parking::findOrFail($id);
         $complaint->update(array_merge(
             $request->all(),
             ['updated_by' => Auth::id(),'user_id' => Auth::id()]
         ));
 
-        return response()->json(['data' => new ComplaintResource($complaint)], 200);
+        return response()->json(['data' => new ParkingResource($complaint)], 200);
     }
 
     public function destroy($id)
     {
-        $complaint = Complaint::findOrFail($id);
+        $complaint = Parking::findOrFail($id);
         $complaint->update(['deleted_by' => Auth::id()]);
         $complaint->delete();
 
-        return response()->json(['message' => 'Complaint deleted successfully'], 200);
+        return response()->json(['message' => 'Parking deleted successfully'], 200);
     }
 
 }

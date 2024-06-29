@@ -1,12 +1,11 @@
 <?php
 
-namespace Modules\Complaint\Http\Resources;
+namespace Modules\Visitor\Http\Resources;
 
 use Illuminate\Http\Request;
-use Modules\Complaint\Http\Resources\ComplaintResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ComplaintCollection extends ResourceCollection
+class VisitorCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
