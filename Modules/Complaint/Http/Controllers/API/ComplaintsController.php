@@ -30,7 +30,7 @@ class ComplaintsController extends Controller
 
         $complaints = $query->paginate(10); // Adjust pagination as per your needs
 
-        return response()->json(ComplaintResource::collection($complaints), 200);
+        return response()->json(['status'=>1,'data'=>ComplaintResource::collection($complaints),'message'=>''], 200);
     }
 
     public function store(Request $request)
@@ -52,7 +52,7 @@ class ComplaintsController extends Controller
             ['created_by' => Auth::id(),'user_id' => Auth::id(),'status'=>'pending']
         ));
 
-        return response()->json(['data' => new ComplaintResource($complaint)], 201);
+        return response()->json(['status'=>1,'data' => new ComplaintResource($complaint),'message'=>''], 201);
     }
 
     public function update(Request $request, $id)
@@ -75,7 +75,7 @@ class ComplaintsController extends Controller
             ['updated_by' => Auth::id(),'user_id' => Auth::id()]
         ));
 
-        return response()->json(['data' => new ComplaintResource($complaint)], 200);
+        return response()->json(['status'=>1,'data' => new ComplaintResource($complaint),'message'=>''], 200);
     }
 
     public function destroy($id)
@@ -84,7 +84,7 @@ class ComplaintsController extends Controller
         $complaint->update(['deleted_by' => Auth::id()]);
         $complaint->delete();
 
-        return response()->json(['message' => 'Complaint deleted successfully'], 200);
+        return response()->json(['message' => 'Complaint deleted successfully','status'=>1], 200);
     }
 
 }
