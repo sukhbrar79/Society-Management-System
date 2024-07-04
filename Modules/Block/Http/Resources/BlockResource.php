@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Flat\Http\Resources;
+namespace Modules\Block\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FlatResource extends JsonResource
+class BlockResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -19,10 +19,7 @@ class FlatResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'status' => $this->status,
-            'floor'=>$this->floor,
-            'rooms'=>$this->rooms,
-            'block'=>$this->block->name?$this->block->name:'-',
+            'description'=>$this->description,
         ];
-    
     }
 }

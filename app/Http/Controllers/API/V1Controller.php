@@ -104,4 +104,12 @@ class V1Controller extends Controller
             'data' => new UserResource($user)
         ]);
     }
+
+    public function emergencyDetails(){
+        return response()->json([
+            'success' => true,
+            'message' => '',
+            'data' => ['name'=>setting('emergency_name'),'email'=>setting('emergency_email'),'phone'=>setting('emergency_phone'),'position'=>setting('emergency_position')]
+        ]);
+    }
 }

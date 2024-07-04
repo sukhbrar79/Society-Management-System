@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->date('invoice_date');
             $table->date('due_date');
+            $table->json('transaction')->nullable();
             $table->enum('status', ['Pending', 'Paid', 'Overdue'])->default('Pending');
            
             $table->integer('created_by')->unsigned()->nullable();

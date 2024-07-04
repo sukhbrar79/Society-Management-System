@@ -12,7 +12,9 @@ Route::post('login', [V1Controller::class, 'login']);
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', [V1Controller::class, 'logout']);
     Route::get('/profile', [V1Controller::class, 'profileShow']);
+    Route::get('/emergencyDetails', [V1Controller::class, 'emergencyDetails']);
     Route::put('/profile', [V1Controller::class, 'profileUpdate']);
+    
 });
 
 

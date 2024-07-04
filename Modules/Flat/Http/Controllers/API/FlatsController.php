@@ -18,14 +18,14 @@ class FlatsController extends Controller
         $query = Flat::query();
 
         // Apply filters if provided in the request
-        if ($request->has('status')) {
-            $query->where('status', $request->status);
+        if ($request->has('id')) {
+            $query->where('block_id', $request->id);
         }
 
         // You can add more filters based on your requirements
 
         $flats = $query->paginate(10); // Adjust pagination as per your needs
 
-        return response()->json(new FlatCollection($flats), 200);
+        return response()->json(['status'=>1,'data'=>FlatResource::collection($flats),'message'=>''], 200);
     }
 }

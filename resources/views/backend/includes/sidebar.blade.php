@@ -36,7 +36,7 @@ $notifications_latest = optional($notifications)->take(5);
         @php
             $module_name = "blocks";
             $text = __('Blocks');
-            $icon = "fa-solid fa-user-group";
+            $icon = "fa-solid fa-building";
             $permission = "view_".$module_name;
             $url = route('backend.'.$module_name.'.index');
         @endphp
@@ -45,7 +45,7 @@ $notifications_latest = optional($notifications)->take(5);
         @php
             $module_name = "flats";
             $text = __('Flats');
-            $icon = "fa-solid fa-user-group";
+            $icon = "fa-solid fa-building";
             $permission = "view_".$module_name;
             $url = route('backend.'.$module_name.'.index');
         @endphp
@@ -63,7 +63,7 @@ $notifications_latest = optional($notifications)->take(5);
         @php
             $module_name = "complaints";
             $text = __('Residents Complaints');
-            $icon = "fa-regular fa-file-lines";
+            $icon = "fa-regular fa-sticky-note";
             $permission = "view_".$module_name;
             $url = route('backend.'.$module_name.'.index');
         @endphp
@@ -80,30 +80,13 @@ $notifications_latest = optional($notifications)->take(5);
 
         @php
             $module_name = "parkings";
-            $icon = "fa-regular fa-file-lines";
+            $text = __('Parkings');
+            $icon = "fa-regular fa-taxi";
             $permission = "view_".$module_name;
             $url = route('backend.'.$module_name.'.index');
         @endphp
-
-        @can($permission)
-        <li class="nav-group" aria-expanded="true">
-            <a class="nav-link nav-group-toggle" href="#">
-                <i class="nav-icon {{$icon}}"></i>&nbsp;@lang('Parkings')
-            </a>
-            <ul class="nav-group-items compact" style="height: auto;">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('backend.'.$module_name.'.index') }}">
-                        <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Parking Allocations
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('backend.parking_requests.index') }}">
-                        <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Parking Requests
-                    </a>
-                </li>
-            </ul>
-        </li>
-        @endcan
+        <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
+        
 
         @php
             $module_name = "visitors";

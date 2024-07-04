@@ -21,6 +21,7 @@ class InvoiceResource extends JsonResource
             'status' => $this->status,
             'invoice_date' => $this->invoice_date,
             'due_date' => $this->due_date,
+            'payment_link'=>route('stripe.getpost',$this->id)
         ];
     }
 }

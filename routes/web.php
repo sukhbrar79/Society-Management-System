@@ -25,6 +25,9 @@ require __DIR__.'/auth.php';
 // home route
 Route::get('home', [FrontendController::class, 'index'])->name('home');
 
+Route::get("stripe/{invoice_id}", ['as' => "stripe.getpost", 'uses' => "App\Http\Controllers\Backend\StripePaymentController@stripe"]);
+Route::post("stripe", ['as' => "stripe.post", 'uses' => "App\Http\Controllers\Backend\StripePaymentController@stripePost"]);
+
 // Language Switch
 Route::get('language/{language}', [LanguageController::class, 'switch'])->name('language.switch');
 
@@ -115,6 +118,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Backend', 'prefix' => 'admin'
     *
     * ---------------------------------------------------------------------
     */
+
+    
+
+
     $module_name = 'roles';
     $controller_name = 'RolesController';
     Route::resource("{$module_name}", "{$controller_name}");

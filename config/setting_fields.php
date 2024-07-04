@@ -52,13 +52,37 @@ return [
 
         'elements' => [
             [
+                'type' => 'text', // input fields type
+                'data' => 'string', // data type, string, int, boolean
+                'name' => 'emergency_name', // unique name for field
+                'label' => 'Emergency Person Name', // you know what label it is
+                'rules' => 'required', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => 'Rahul Sharma', // default value if you want
+            ],[
                 'type' => 'email', // input fields type
                 'data' => 'string', // data type, string, int, boolean
-                'name' => 'email', // unique name for field
-                'label' => 'Email', // you know what label it is
+                'name' => 'emergency_email', // unique name for field
+                'label' => 'Emergency Email', // you know what label it is
                 'rules' => 'required|email', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => 'info@example.com', // default value if you want
+                'value' => 'manager@example.com', // default value if you want
+            ],[
+                'type' => 'text', // input fields type
+                'data' => 'string', // data type, string, int, boolean
+                'name' => 'emergency_phone', // unique name for field
+                'label' => 'Emergency Phone', // you know what label it is
+                'rules' => 'required', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => '987463120', // default value if you want
+            ],[
+                'type' => 'text', // input fields type
+                'data' => 'string', // data type, string, int, boolean
+                'name' => 'emergency_position', // unique name for field
+                'label' => 'Email', // you know what label it is
+                'rules' => 'required', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => 'Manager', // default value if you want
             ],
         ],
 
