@@ -31,7 +31,7 @@ class VisitorController extends Controller
 
         $visitors = $query->paginate(10); // Adjust pagination as per your needs
 
-        return response()->json(new VisitorCollection($visitors), 200);
+        return response()->json(['status'=>1,'data'=>new VisitorCollection($visitors),'message'=>''], 200);
     }
 
     public function store(Request $request)
@@ -50,7 +50,7 @@ class VisitorController extends Controller
 
         $visitor = Visitor::create(array_merge($request->all(), ['created_by' => Auth::id(), 'user_id' => Auth::id(),'status'=>'pending']));
 
-        return response()->json(['data' => new VisitorResource($visitor)], 201);
+        return response()->json(['status'=>1,'data'=>new VisitorResource($visitor),'message'=>''], 201);
     }
 
     public function update(Request $request, $id)
@@ -71,7 +71,7 @@ class VisitorController extends Controller
         $visitor = Visitor::findOrFail($id);
         $visitor->update(array_merge($request->all(), ['updated_by' => Auth::id(), 'user_id' => Auth::id()]));
 
-        return response()->json(['data' => new VisitorResource($visitor)], 200);
+        return response()->json(['status'=>1,'data'=>new VisitorResource($visitor),'message'=>''], 200);
     }
 
     public function destroy($id)
@@ -80,6 +80,6 @@ class VisitorController extends Controller
         $visitor->update(['deleted_by' => Auth::id()]);
         $visitor->delete();
 
-        return response()->json(['message' => 'Visitor deleted successfully'], 200);
+        return response()->json(['status'=>1,'message' => 'Visitor deleted successfully'], 200);
     }
 }
