@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Parking\Http\Resources;
+namespace Modules\Invoice\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ParkingResource extends JsonResource
+class InvoiceResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -16,9 +16,11 @@ class ParkingResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'spot_number' => $this->spot_number,
-            'spot_type' => $this->spot_type,
-            'location' => $this->location
+            'invoice_number' => $this->invoice_number,
+            'amount' => $this->amount,
+            'status' => $this->status,
+            'invoice_date' => $this->invoice_date,
+            'due_date' => $this->due_date,
         ];
     }
 }

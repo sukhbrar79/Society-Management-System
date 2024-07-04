@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use Modules\Invoice\Http\Controllers\API\InvoiceController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/invoices', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function () {
+    Route::get('/invoice', [InvoiceController::class, 'index']);
+    Route::post('/invoice', [InvoiceController::class, 'store']);
+    Route::put('/invoice/{id}', [InvoiceController::class, 'update']);
+    Route::delete('/invoice/{id}', [InvoiceController::class, 'destroy']);
 });

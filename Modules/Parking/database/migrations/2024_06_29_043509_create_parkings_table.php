@@ -32,9 +32,11 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->foreignId('parking_id')->constrained('parkings', 'id')->onDelete('cascade');
             $table->foreignId('resident_id')->constrained('users', 'id')->onDelete('cascade');
+            $table->unsignedBigInteger('block_id')->nullable();
+            $table->unsignedBigInteger('flat_id')->nullable();
             $table->date('allocation_date');
             $table->date('expiration_date');
-            $table->enum('status', ['Expired', 'Active', 'Upcoming']);
+            $table->enum('status', ['Expired', 'Active', 'Upcoming','Pending','Approved','Rejected']);
 
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
@@ -42,23 +44,11 @@ return new class extends Migration
 
             $table->timestamps();
             $table->softDeletes();
+             // Foreign key constraints
+            
+         
         });
 
-        Schema::create('parking_requests', function (Blueprint $table) {
-            $table->bigIncrements('id');
-
-            $table->foreignId('resident_id')->constrained('users', 'id')->onDelete('cascade');
-            $table->foreignId('parking_id')->constrained('parkings', 'id')->onDelete('cascade');
-            $table->date('request_date');
-            $table->enum('status', ['Pending', 'Approved', 'Rejected']);
-
-            $table->integer('created_by')->unsigned()->nullable();
-            $table->integer('updated_by')->unsigned()->nullable();
-            $table->integer('deleted_by')->unsigned()->nullable();
-
-            $table->timestamps();
-            $table->softDeletes();
-        });
     }
 
     /**
@@ -68,19 +58,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('parking_requests', function (Blueprint $table) {
-            if (Schema::hasTable('parking_requests')) {
-                $table->dropForeign('parking_requests_parking_id_foreign');
-                $table->dropForeign('parking_requests_resident_id_foreign');
-            }
-        });
-        Schema::table('parking_allocations', function (Blueprint $table) {
-            if (Schema::hasTable('parking_allocations')) {
-                $table->dropForeign('parking_allocations_parking_id_foreign');
-                $table->dropForeign('parking_allocations_resident_id_foreign');
-            }
-        });
-        Schema::dropIfExists('parking_requests');
+        
         Schema::dropIfExists('parking_allocations');
         Schema::dropIfExists('parkings');
     }

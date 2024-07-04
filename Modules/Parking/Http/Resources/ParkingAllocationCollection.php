@@ -3,9 +3,10 @@
 namespace Modules\Parking\Http\Resources;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Parking\Http\Resources\ParkingResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ParkingResource extends JsonResource
+class ParkingAllocationCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -15,10 +16,7 @@ class ParkingResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'spot_number' => $this->spot_number,
-            'spot_type' => $this->spot_type,
-            'location' => $this->location
+            $this->collection
         ];
     }
 }

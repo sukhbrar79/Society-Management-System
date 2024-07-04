@@ -36,10 +36,7 @@ class ParkingDatabaseSeeder extends Seeder
         $rows = ParkingAllocation::all();
         echo " Insert: parkings \n\n";
 
-        ParkingRequest::factory()->count(20)->create();
-        $rows = ParkingRequest::all();
-        echo " Insert: parkings \n\n";
-
+      
         // Enable foreign key checks!
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

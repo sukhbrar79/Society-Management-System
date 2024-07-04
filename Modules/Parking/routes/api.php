@@ -17,9 +17,10 @@ use Modules\Parking\Http\Controllers\API\ParkingController;
 
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('/parking', [ParkingsController::class, 'index']);
-    Route::post('/parking', [ParkingsController::class, 'store']);
-    Route::put('/parking/{id}', [ParkingsController::class, 'update']);
-    Route::delete('/parking/{id}', [ParkingsController::class, 'destroy']);
+    Route::get('/parking', [ParkingController::class, 'index']);
+    Route::get('/parking_slots', [ParkingController::class, 'parkingSlots']);
+    Route::post('/parking', [ParkingController::class, 'store']);
+    Route::put('/parking/{id}', [ParkingController::class, 'update']);
+    Route::delete('/parking/{id}', [ParkingController::class, 'destroy']);
 });
 
