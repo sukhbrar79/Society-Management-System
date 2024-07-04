@@ -31,7 +31,7 @@ class VisitorController extends Controller
 
         $visitors = $query->paginate(10); // Adjust pagination as per your needs
 
-        return response()->json(['status'=>1,'data'=>new VisitorCollection($visitors),'message'=>''], 200);
+        return response()->json(['status'=>1,'data'=>VisitorResource::collection($visitors),'message'=>''], 200);
     }
 
     public function store(Request $request)
@@ -39,29 +39,28 @@ class VisitorController extends Controller
         $validator = Validator::make($request->all(), [
             'block_id' => 'nullable|exists:blocks,id',
             'flat_id' => 'nullable|exists:flats,id',
-            'subject' => 'nullable|string|max:125',
-            'description' => 'nullable|string',
-            'priority' => 'required|in:low,medium,high',
+            'contact_number' => 'nullable|string|max:125',
+            'name' => 'required|string',
+            'purpose' => 'required'  
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $visitor = Visitor::create(array_merge($request->all(), ['created_by' => Auth::id(), 'user_id' => Auth::id(),'status'=>'pending']));
+        $visitor = Visitor::create(array_merge($request->all(), ['created_by' => Auth::id(),'resident_id'=>Auth::id()]));
 
         return response()->json(['status'=>1,'data'=>new VisitorResource($visitor),'message'=>''], 201);
     }
-
+    
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'block_id' => 'nullable|exists:blocks,id',
             'flat_id' => 'nullable|exists:flats,id',
-            'subject' => 'nullable|string|max:125',
-            'description' => 'nullable|string',
-            'status' => 'required|in:pending,in_progress,resolved,closed',
-            'priority' => 'required|in:low,medium,high',
+            'contact_number' => 'nullable|string|max:125',
+            'name' => 'required|string',
+            'purpose' => 'required'            
         ]);
 
         if ($validator->fails()) {
@@ -69,7 +68,7 @@ class VisitorController extends Controller
         }
 
         $visitor = Visitor::findOrFail($id);
-        $visitor->update(array_merge($request->all(), ['updated_by' => Auth::id(), 'user_id' => Auth::id()]));
+        $visitor->update(array_merge($request->all(), ['updated_by' => Auth::id()]));
 
         return response()->json(['status'=>1,'data'=>new VisitorResource($visitor),'message'=>''], 200);
     }
