@@ -109,7 +109,7 @@ class V1Controller extends Controller
         return response()->json([
             'success' => true,
             'message' => '',
-            'data' => ['name'=>setting('emergency_name'),'email'=>setting('emergency_email'),'phone'=>setting('emergency_phone'),'position'=>setting('emergency_position')]
+            'data' => [['name'=>setting('emergency_name'),'email'=>setting('emergency_email'),'phone'=>setting('emergency_phone'),'position'=>setting('emergency_position')],['name'=>setting('emergency_name'),'email'=>setting('emergency_email'),'phone'=>setting('emergency_phone'),'position'=>setting('emergency_position')]]
         ]);
     }
 }
