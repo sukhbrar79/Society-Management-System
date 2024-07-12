@@ -11,6 +11,7 @@ use Modules\Complaint\database\seeders\ComplaintDatabaseSeeder;
 use Modules\Visitor\database\seeders\VisitorDatabaseSeeder;
 use Modules\Parking\database\seeders\ParkingDatabaseSeeder;
 use Modules\Invoice\database\seeders\InvoiceDatabaseSeeder;
+use Modules\EmergencyContact\database\seeders\EmergencyContactDatabaseSeeder;
 
 use Illuminate\Database\Seeder;
 
@@ -38,6 +39,8 @@ class AuthTableSeeder extends Seeder
         $this->call(VisitorDatabaseSeeder::class);
         $this->call(ParkingDatabaseSeeder::class);
         $this->call(InvoiceDatabaseSeeder::class);
+        $this->call(EmergencyContactDatabaseSeeder::class);
+        
 
     }
 }

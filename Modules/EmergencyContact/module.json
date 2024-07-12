@@ -1,0 +1,13 @@
+{
+    "name": "EmergencyContact",
+    "alias": "emergencycontact",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\EmergencyContact\\Providers\\EmergencyContactServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

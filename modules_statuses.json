@@ -9,5 +9,6 @@
     "Parking": true,
     "NoticeBoard": true,
     "Block": true,
-    "Flat": true
+    "Flat": true,
+    "EmergencyContact": true
 }

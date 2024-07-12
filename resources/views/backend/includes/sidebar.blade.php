@@ -79,6 +79,15 @@ $notifications_latest = optional($notifications)->take(5);
         <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
 
         @php
+            $module_name = "emergencycontacts";
+            $text = __('Emergency Contacts');
+            $icon = "fa-regular fa-file-lines";
+            $permission = "view_".$module_name;
+            $url = route('backend.'.$module_name.'.index');
+        @endphp
+        <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
+
+        @php
             $module_name = "parkings";
             $text = __('Parkings');
             $icon = "fa-regular fa-taxi";
