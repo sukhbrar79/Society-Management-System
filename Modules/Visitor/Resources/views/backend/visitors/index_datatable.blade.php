@@ -73,6 +73,12 @@
                                 @lang("visitor::text.check_out_time")
                             </th>
                             <th>
+                                @lang("visitor::text.check_in_date")
+                            </th>
+                            <th>
+                                @lang("visitor::text.check_out_date")
+                            </th>
+                            <th>
                                 @lang("visitor::text.purpose")
                             </th>
                             <th>
@@ -154,6 +160,14 @@
             {
                 data: 'check_out_time',
                 name: 'check_out_time'
+            },
+            {
+                data: 'check_in_date',
+                name: 'check_in_date'
+            },
+            {
+                data: 'check_out_date',
+                name: 'check_out_date'
             },
             {
                 data: 'purpose',

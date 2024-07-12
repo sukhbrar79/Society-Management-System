@@ -24,6 +24,8 @@ class VisitorResource extends JsonResource
             'flat_id' => $this->flat->name,
             'check_in_time' => $this->check_in_time,
             'check_out_time' => $this->check_out_time,
+            'check_in_date' => $this->check_in_date,
+            'check_out_date' => $this->check_out_date,
         ];
     }
 }

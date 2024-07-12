@@ -52,7 +52,7 @@ class VisitorsController extends BackendBaseController
         $page_heading = label_case($module_title);
         $title = $page_heading . ' ' . label_case($module_action);
 
-        $$module_name = $module_model::select('id','block_id','resident_id','flat_id','name','contact_number','check_in_time','check_out_time','purpose','vehicle_number', 'updated_at');
+        $$module_name = $module_model::select('id','block_id','resident_id','flat_id','name','contact_number','check_in_time','check_out_time','check_in_date','check_out_date','purpose','vehicle_number', 'updated_at');
 
         $data = $$module_name;
 

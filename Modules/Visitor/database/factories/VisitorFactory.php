@@ -41,6 +41,8 @@ class VisitorFactory extends Factory
             'deleted_by' => null, // Adjust as needed
             'check_in_time' => Carbon::now(),
             'check_out_time' => Carbon::now()->addHours(rand(1, 5)),
+            'check_in_date' => Carbon::now(),
+            'check_out_date' => Carbon::now()->addHours(rand(1, 5)),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
             'deleted_at' => null,

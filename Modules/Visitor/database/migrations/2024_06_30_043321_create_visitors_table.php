@@ -24,6 +24,8 @@ return new class extends Migration
             $table->unsignedBigInteger('flat_id')->nullable();
             $table->timestamp('check_in_time')->nullable();
             $table->timestamp('check_out_time')->nullable();
+            $table->date('check_in_date')->nullable();
+            $table->date('check_out_date')->nullable();
             $table->string('purpose')->nullable();
             $table->string('vehicle_number')->nullable();
 
