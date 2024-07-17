@@ -5,6 +5,7 @@ use App\Http\Controllers\LanguageController;
 use App\Livewire\Privacy;
 use App\Livewire\Terms;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 *
@@ -23,7 +24,10 @@ require __DIR__.'/auth.php';
 */
 
 // home route
-Route::get('home', [FrontendController::class, 'index'])->name('home');
+//Route::get('home', [FrontendController::class, 'index'])->name('home');
+
+Route::get('home', [AuthenticatedSessionController::class, 'create'])
+        ->name('home');
 
 Route::get("stripe/{invoice_id}", ['as' => "stripe.getpost", 'uses' => "App\Http\Controllers\Backend\StripePaymentController@stripe"]);
 Route::post("stripe", ['as' => "stripe.post", 'uses' => "App\Http\Controllers\Backend\StripePaymentController@stripePost"]);
@@ -38,7 +42,7 @@ Route::get('terms', Terms::class)->name('terms');
 Route::get('privacy', Privacy::class)->name('privacy');
 
 Route::group(['namespace' => 'App\Http\Controllers\Frontend', 'as' => 'frontend.'], function () {
-    Route::get('/', 'FrontendController@index')->name('index');
+    Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('index');
 
     Route::group(['middleware' => ['auth']], function () {
         /*
