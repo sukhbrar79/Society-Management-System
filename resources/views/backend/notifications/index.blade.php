@@ -63,7 +63,7 @@
                                 </a>
                             </td>
                             <td>
-                                {{ $module_name_singular->data['module'] }}
+                                {{ $module_name_singular?->data['module'] ?? 'Default Module' }}
                             </td>
                             <td>
                                 {{ $module_name_singular->updated_at->diffForHumans() }}

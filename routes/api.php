@@ -14,6 +14,8 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/profile', [V1Controller::class, 'profileShow']);
     Route::get('/emergencyDetails', [V1Controller::class, 'emergencyDetails']);
     Route::put('/profile', [V1Controller::class, 'profileUpdate']);
+    Route::get('/notifications/list', [V1Controller::class, 'list']);
+    Route::post('/notifications/read/{notification}', [V1Controller::class, 'markAsRead']);
     
 });
 

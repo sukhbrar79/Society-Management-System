@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\UserResource;
-
+use App\Http\Resources\NotificationResource;
+use App\Http\Resources\NotificationCollection;
 
 class V1Controller extends Controller
 {
@@ -67,7 +68,7 @@ class V1Controller extends Controller
         // Return the user profile data
         return response()->json([
             'success' => true,
-            'data' => new UserResource($user)
+            'data' => new UserResource($user),
         ]);
     }
 
@@ -85,10 +86,13 @@ class V1Controller extends Controller
 
         // Check if validation fails
         if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors()
-            ], 422);
+            return response()->json(
+                [
+                    'success' => false,
+                    'errors' => $validator->errors(),
+                ],
+                422,
+            );
         }
 
         // Update the user profile
@@ -101,15 +105,51 @@ class V1Controller extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Profile updated successfully',
-            'data' => new UserResource($user)
+            'data' => new UserResource($user),
         ]);
     }
 
-    public function emergencyDetails(){
+    public function emergencyDetails()
+    {
         return response()->json([
             'success' => true,
             'message' => '',
-            'data' => [['name'=>setting('emergency_name'),'email'=>setting('emergency_email'),'phone'=>setting('emergency_phone'),'position'=>setting('emergency_position')],['name'=>setting('emergency_name'),'email'=>setting('emergency_email'),'phone'=>setting('emergency_phone'),'position'=>setting('emergency_position')]]
+            'data' => [['name' => setting('emergency_name'), 'email' => setting('emergency_email'), 'phone' => setting('emergency_phone'), 'position' => setting('emergency_position')], ['name' => setting('emergency_name'), 'email' => setting('emergency_email'), 'phone' => setting('emergency_phone'), 'position' => setting('emergency_position')]],
+        ]);
+    }
+    /**
+     * Get a list of notifications for the authenticated user.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function list()
+    {
+        $user = Auth::user();
+        $notifications = $user->notifications()->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => '',
+            'data' =>  new NotificationCollection($notifications),
+        ]);
+    }
+
+    /**
+     * Mark a notification as read.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $notificationId
+     * @return \Illuminate\Http\Response
+     */
+    public function markAsRead(Request $request, $notificationId)
+    {
+        $user = Auth::user();
+        $notification = $user->notifications()->findOrFail($notificationId);
+        $notification->markAsRead();
+        return response()->json([
+            'success' => true,
+            'message' => 'Notification marked as read.',
+            'data' => '',
         ]);
     }
 }

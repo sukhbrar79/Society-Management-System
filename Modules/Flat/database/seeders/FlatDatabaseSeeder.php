@@ -30,6 +30,17 @@ class FlatDatabaseSeeder extends Seeder
         $rows = Flat::all();
         echo " Insert: flats \n\n";
 
+        $residents = \App\Models\User::whereHas('roles', function($query) {
+            $query->where('name', 'resident');
+        })->get();
+
+        foreach ($residents as $key => $value) {
+            $flat = $rows->random();
+            $value->flat_id=$flat->id;
+            $value->block_id=$flat->block->id;
+            $value->save();
+        }
+
         // Enable foreign key checks!
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

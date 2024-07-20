@@ -6,6 +6,8 @@ use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 /**
  * Class PermissionRoleTableSeeder.
@@ -30,12 +32,42 @@ class PermissionRoleTableSeeder extends Seeder
         $admin->givePermissionTo(['view_backend', 'edit_settings']);
 
         $manager = Role::create(['id' => '3', 'name' => 'manager']);
-        $manager->givePermissionTo('view_backend');
+        
+        $modulesPath = base_path('Modules');
+        $moduleDirectories = File::directories($modulesPath);
+
+        foreach ($moduleDirectories as $moduleDirectory) {
+            $moduleName = basename($moduleDirectory);
+            $moduleName = Str::lower(Str::plural($moduleName));
+
+            $manager->givePermissionTo('add_'.$moduleName);
+            $manager->givePermissionTo('edit_'.$moduleName);
+            $manager->givePermissionTo('view_'.$moduleName);
+            $manager->givePermissionTo('delete_'.$moduleName);
+            $manager->givePermissionTo('restore_'.$moduleName);
+        }
+        $manager->givePermissionTo(['view_backend', 'view_circles','view_residents']);
 
         $executive = Role::create(['id' => '4', 'name' => 'executive']);
         $executive->givePermissionTo('view_backend');
 
         $user = Role::create(['id' => '5', 'name' => 'resident']);
+        $user = Role::create(['id' => '6', 'name' => 'security-guard']);
+        $user->givePermissionTo('view_backend');
+        $user->givePermissionTo('add_visitors');
+        $user->givePermissionTo('edit_visitors');
+        $user->givePermissionTo('view_visitors');
+        $user->givePermissionTo('delete_visitors');
+        $user->givePermissionTo('restore_visitors');
+        $user->givePermissionTo(['view_backend', 'view_circles']);
+
+        $user = Role::create(['id' => '7', 'name' => 'service-staff']);
+        $user->givePermissionTo('view_backend');
+        $user->givePermissionTo('edit_complaints');
+        $user->givePermissionTo('view_complaints');
+        $user->givePermissionTo(['view_backend', 'view_circles']);
+
+
     }
 
     public function CreateDefaultPermissions()
@@ -48,26 +80,19 @@ class PermissionRoleTableSeeder extends Seeder
             $permission->saveOrFail();
         }
 
-        Artisan::call('auth:permissions', [
-            'name' => 'posts',
-        ]);
-        echo "\n _Posts_ Permissions Created.";
+        $modulesPath = base_path('Modules');
+        $moduleDirectories = File::directories($modulesPath);
 
-        Artisan::call('auth:permissions', [
-            'name' => 'categories',
-        ]);
-        echo "\n _Categories_ Permissions Created.";
+        foreach ($moduleDirectories as $moduleDirectory) {
+            $moduleName = basename($moduleDirectory);
+            $moduleName = Str::lower(Str::plural($moduleName));
+            
+            Artisan::call('auth:permissions', [
+                'name' => $moduleName,
+            ]);
+            
+        }
 
-        Artisan::call('auth:permissions', [
-            'name' => 'tags',
-        ]);
-        echo "\n _Tags_ Permissions Created.";
-
-        Artisan::call('auth:permissions', [
-            'name' => 'comments',
-        ]);
-        echo "\n _Comments_ Permissions Created.";
-
-        echo "\n\n";
+       
     }
 }

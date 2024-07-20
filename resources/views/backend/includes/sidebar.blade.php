@@ -55,7 +55,7 @@ $notifications_latest = optional($notifications)->take(5);
             $module_name = "users";
             $text = __('Residents');
             $icon = "fa-solid fa-user-group";
-            $permission = "view_".$module_name;
+            $permission = "view_residents";
             $url = route('backend.'.$module_name.'.residents');
         @endphp
         <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />

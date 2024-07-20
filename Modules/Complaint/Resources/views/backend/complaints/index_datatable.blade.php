@@ -70,6 +70,9 @@
                                 @lang("complaint::text.status")
                             </th>
                             <th>
+                                @lang("complaint::text.assigned-to")
+                            </th>
+                            <th>
                                 @lang("complaint::text.updated_at")
                             </th>
                             <th class="text-end">
@@ -141,6 +144,10 @@
             {
                 data: 'status',
                 name: 'status'
+            },
+            {
+                data: 'assigned_to',
+                name: 'assigned_to'
             },
             {
                 data: 'updated_at',

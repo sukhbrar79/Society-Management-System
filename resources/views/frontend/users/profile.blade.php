@@ -150,6 +150,15 @@
                         {{ $$module_name_singular->$field_name }}
                     </div>
                 </div>
+                @foreach (auth()->user()->notifications as $notification)
+                    <div class="notification">
+                        <p>{{ $notification->data['invoice_number'] }} - {{ $notification->data['amount'] }}</p>
+                        <p>{{ $notification->created_at->diffForHumans() }}</p>
+                        <a href="{{ url('/invoices/' . $notification->data['invoice_id']) }}">View Invoice</a>
+                    </div>
+                @endforeach
+
+
             </div>
         </div>
     </div>

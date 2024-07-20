@@ -1,4 +1,4 @@
-@props(['route' => '', 'icon' => 'fas fa-wrench', 'title', 'small' => '', 'class' => ''])
+@props(['route' => '', 'icon' => 'fas fa-pencil', 'title', 'small' => '', 'class' => ''])
 
 @if ($route)
     <a class='btn btn-outline-primary {{ $small == 'true' ? 'btn-sm' : '' }} {{ $class }} m-1'

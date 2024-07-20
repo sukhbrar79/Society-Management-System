@@ -21,11 +21,12 @@
         </tr>
     </thead>
     <tbody>
+      
         @foreach ($all_columns as $column)
         <tr>
             <td>
                 <strong>
-                    {{ __(label_case($column->name)) }}
+                    {{ __(label_case($column['name'])) }}
                 </strong>
             </td>
             <td>

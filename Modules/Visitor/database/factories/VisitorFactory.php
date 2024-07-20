@@ -26,7 +26,9 @@ class VisitorFactory extends Factory
     {
         $blockIds = \Modules\Block\Models\Block::pluck('id')->toArray();
         $flatIds = \Modules\Flat\Models\Flat::pluck('id')->toArray();
-        $userIds = \App\Models\User::pluck('id')->toArray();
+        $userIds = \App\Models\User::whereHas('roles', function($query) {
+            $query->where('name', 'resident');
+        })->pluck('id')->toArray();
 
         return [
             'name' => $this->faker->name,

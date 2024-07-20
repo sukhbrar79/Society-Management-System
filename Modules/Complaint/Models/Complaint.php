@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Block\Models\Block;
 use Modules\Flat\Models\Flat;
+use App\Notifications\ComplaintAssigned;
 use App\Enums\ComplaintStatus;
 
 class Complaint extends BaseModel
@@ -21,6 +22,23 @@ class Complaint extends BaseModel
         'status' => ComplaintStatus::class,
     ];
     
+    protected static function booted()
+    {
+        static::updating(function ($complaint) {
+            // Check if 'assigned_to' is being updated from empty to a new staff member
+            if ($complaint->isDirty('assigned_to') && empty($complaint->getOriginal('assigned_to'))) {
+                $newAssignedTo = $complaint->assigned_to;
+                
+                // Ensure $newAssignedTo is a valid staff ID or user identifier
+                $staff = User::find($newAssignedTo);
+                
+                if ($staff) {
+                    // Send notification to the staff
+                    $staff->notify(new ComplaintAssigned($complaint));
+                }
+            }
+        });
+    }
 
     /**
      * Create a new factory instance for the model.
@@ -46,6 +64,11 @@ class Complaint extends BaseModel
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function staff()
+    {
+        return $this->hasOne(User::class, 'id', 'assigned_to');
     }
 }
 

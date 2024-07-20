@@ -18,4 +18,7 @@ enum ComplaintStatus: string
             self::Closed => 'Closed',
         };
     }
+    public function getValue(): string {
+        return $this->value;
+    }
 }

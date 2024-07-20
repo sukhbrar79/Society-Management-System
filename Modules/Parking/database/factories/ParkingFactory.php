@@ -24,12 +24,15 @@ class ParkingFactory extends Factory
      */
     public function definition()
     {
+        $managerIds = \App\Models\User::whereHas('roles', function($query) {
+            $query->where('name', 'manager');
+        })->pluck('id')->toArray();
         return [
             'spot_number' => $this->faker->bothify('##??'),
             'spot_type' => $this->faker->randomElement(['Compact', 'Standard', 'Large', 'Handicapped']),
             'location' => $this->faker->address,
-            'created_by' => \App\Models\User::factory(),  // Assuming you have a User model and factory
-            'updated_by' => \App\Models\User::factory(),  // Assuming you have a User model and factory
+            'created_by' => $this->faker->randomElement($managerIds),  // Assuming you have a User model and factory
+            'updated_by' => $this->faker->randomElement($managerIds),  // Assuming you have a User model and factory
             'created_at' => now(),
             'updated_at' => now(),
         ];

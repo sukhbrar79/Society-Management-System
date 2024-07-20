@@ -37,10 +37,10 @@
                             <tr>
                                 <th>Text</th>
                                 <td>
-                                    {!! $data->text !!}
+                                    {!! $data->text??'-' !!}
                                 </td>
                             </tr>
-                            @if($data->url_backend != '')
+                            @if($data->url_backend??'' != '')
                             <tr>
                                 <th>URL Backend</th>
                                 <td>
@@ -48,7 +48,7 @@
                                 </td>
                             </tr>
                             @endif
-                            @if($data->url_frontend != '')
+                            @if($data->url_frontend??'' != '')
                             <tr>
                                 <th>URL Frontend</th>
                                 <td>

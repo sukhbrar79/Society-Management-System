@@ -26,6 +26,12 @@ class FlatsController extends Controller
 
         $flats = $query->paginate(10); // Adjust pagination as per your needs
 
-        return response()->json(['status'=>1,'data'=>FlatResource::collection($flats),'message'=>''], 200);
+        return response()->json(['status' => 1, 'data' => FlatResource::collection($flats), 'message' => ''], 200);
+    }
+    public function getFlatsByBlock(Request $request)
+    {
+        $blockId = $request->input('block_id');
+        $flats = \Modules\Flat\Models\Flat::where('block_id', $blockId)->pluck('name', 'id');
+        return response()->json(['flats' => $flats]);
     }
 }

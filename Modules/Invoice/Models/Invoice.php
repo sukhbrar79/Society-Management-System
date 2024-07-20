@@ -14,6 +14,10 @@ class Invoice extends BaseModel
 
     protected $table = 'invoices';
 
+    protected $casts = [
+        'due_date' => 'date',
+    ];
+
     /**
      * Create a new factory instance for the model.
      *

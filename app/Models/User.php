@@ -118,4 +118,15 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     {
         return $this->hasOne(Flat::class, 'id', 'block_id');
     }
+
+    public static function getUserNameById($userId)
+    {
+        if (!$userId) {
+            return 'Unknown'; // or an appropriate default value
+        }
+
+        $user = self::find($userId);
+
+        return $user ? $user->name : 'Unknown';
+    }
 }

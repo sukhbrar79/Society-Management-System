@@ -17,4 +17,5 @@ use Modules\Flat\Http\Controllers\API\FlatsController;
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/flats', [FlatsController::class, 'index']);
+    Route::get('/get-flats-by-block', [FlatController::class, 'getFlatsByBlock']);
 });

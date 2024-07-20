@@ -51,20 +51,45 @@ class ComplaintsController extends BackendBaseController
         $page_heading = label_case($module_title);
         $title = $page_heading . ' ' . label_case($module_action);
 
-        $$module_name = $module_model::select('id','block_id','user_id','flat_id','subject','description','status', 'updated_at');
+        // Fetch the user
+        $user = auth()->user();
+
+        // Determine if the user has the 'service staff' role
+        $isServiceStaff = $user->hasRole('service-staff'); // Adjust the role check as necessary
+
+        // Create the base query
+        $query = $module_model::select('id', 'block_id', 'user_id', 'flat_id', 'subject', 'description', 'status', 'assigned_to', 'updated_at');
+
+        // Apply filtering if user is a service staff
+        if ($isServiceStaff) {
+            $query->where('assigned_to', $user->id);
+        }
+
+        $$module_name = $query->get(); // Retrieve the data
 
         $data = $$module_name;
 
-        return Datatables::of($$module_name)
+        return Datatables::of($query)
             ->addColumn('action', function ($data) {
                 $module_name = $this->module_name;
 
                 return view('backend.includes.action_column', compact('module_name', 'data'));
             })
-            ->editColumn('user_id', function($data){ return $data->user->name;})
-            ->editColumn('flat_id', function($data){ return $data->flat->name;})
-            ->editColumn('status', function($data){ return $data->status->displayName();})
-            ->editColumn('block_id', function($data){ return $data->block->name;})
+            ->editColumn('user_id', function ($data) {
+                return $data->user->name;
+            })
+            ->editColumn('flat_id', function ($data) {
+                return $data->flat->name;
+            })
+            ->editColumn('status', function ($data) {
+                return $data->status->displayName();
+            })
+            ->editColumn('block_id', function ($data) {
+                return $data->block->name;
+            })
+            ->editColumn('assigned_to', function ($data) {
+                return $data->staff?->name ?? '-';
+            })
             ->editColumn('updated_at', function ($data) {
                 $module_name = $this->module_name;
 

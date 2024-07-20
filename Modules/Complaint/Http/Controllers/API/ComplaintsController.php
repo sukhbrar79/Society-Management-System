@@ -10,6 +10,7 @@ use Modules\Complaint\Http\Resources\ComplaintCollection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\ComplaintCreated;
 
 class ComplaintsController extends Controller
 {
@@ -51,6 +52,15 @@ class ComplaintsController extends Controller
             $request->all(),
             ['created_by' => Auth::id(),'user_id' => Auth::id(),'status'=>'pending']
         ));
+
+        // Notify all managers
+        $managers = \App\Models\User::whereHas('roles', function($query) {
+            $query->where('name', 'manager');
+        })->get(); // Assuming you have a role field for managers
+
+        foreach ($managers as $manager) {
+            $manager->notify(new ComplaintCreated($complaint));
+        }
 
         return response()->json(['status'=>1,'data' => new ComplaintResource($complaint),'message'=>''], 201);
     }
