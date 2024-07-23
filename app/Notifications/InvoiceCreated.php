@@ -70,6 +70,7 @@ class InvoiceCreated extends Notification
             'due_date' => $this->invoice->due_date,
             'message' => 'A new invoice has been created for you.',
             'subject' => 'New Invoice Created',
+            'link' => '',
         ];
     }
 }

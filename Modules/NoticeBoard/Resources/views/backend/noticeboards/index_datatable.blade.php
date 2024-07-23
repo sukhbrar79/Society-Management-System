@@ -52,7 +52,16 @@
                                 #
                             </th>
                             <th>
-                                @lang("noticeboard::text.name")
+                                Title
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                Expiry Date
                             </th>
                             <th>
                                 @lang("noticeboard::text.updated_at")
@@ -106,6 +115,18 @@
             {
                 data: 'name',
                 name: 'name'
+            },
+            {
+                data: 'description',
+                name: 'description'
+            },
+            {
+                data: 'status',
+                name: 'status'
+            },
+            {
+                data: 'expiry_date',
+                name: 'expiry_date'
             },
             {
                 data: 'updated_at',

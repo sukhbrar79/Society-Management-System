@@ -13,3 +13,5 @@ Artisan::command('inspire', function () {
 Schedule::command('invoices:generate')->monthly();
 
 Schedule::command('invoices:update-overdue')->daily();
+
+Schedule::command('notices:update-expired')->daily();
