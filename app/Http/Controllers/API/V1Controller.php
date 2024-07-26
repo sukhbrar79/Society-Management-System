@@ -34,6 +34,8 @@ class V1Controller extends Controller
 
         $user->sendEmailVerificationNotification();
 
+        $user->syncRoles(['resident']);
+
         $token = $user->createToken('LaravelPassportAuth')->accessToken;
 
         return response()->json(['token' => $token], 200);

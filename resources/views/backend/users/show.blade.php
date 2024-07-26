@@ -25,7 +25,7 @@
 
             <x-slot name="toolbar">
                 <x-backend.buttons.return-back :small=true />
-                <a class="btn btn-primary btn-sm m-1" data-toggle="tooltip" href="{{ route('backend.users.index') }}"
+                <a class="btn btn-primary btn-sm m-1" data-toggle="tooltip" href="{{ !$$module_name_singular->hasRole('resident')?route('backend.users.index'):route('backend.users.residents') }}"
                     title="List"><i class="fas fa-list"></i> List</a>
                 <x-buttons.edit title="{{ __('Edit') }} {{ ucwords(Str::singular($module_name)) }}"
                     route='{!! route("backend.$module_name.edit", $$module_name_singular) !!}' :small=true />

@@ -158,25 +158,6 @@
                     </div>
                 </div>
 
-                @php
-                    $socialFieldsNames = $$module_name_singular->socialFieldsNames();
-                @endphp
-                <div class="row">
-                    @foreach ($$module_name_singular->socialFieldsNames() as $item)
-                        <div class="col-12 col-sm-6 mb-3">
-                            <div class="form-group">
-                                <?php
-                                $field_name = 'social_profiles[' . $item . ']';
-                                $field_lable = label_case($item);
-                                $field_placeholder = $field_lable;
-                                $required = '';
-                                ?>
-                                {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-                                {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
 
                 <div class="row mb-3">
                     <?php
@@ -225,106 +206,91 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <?php
-                    $field_name = 'social';
-                    $field_lable = __('labels.backend.users.fields.social');
-                    $field_placeholder = $field_lable;
-                    $required = '';
-                    ?>
-                    <div class="col-12 col-sm-2">
-                        <div class="form-group">
-                            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! field_required($required) !!}
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-10">
-                        <div class="form-group">
-                            @forelse ($user->providers as $provider)
-                                <li>
-                                    <i class="fab fa-{{ $provider->provider }} fa-fw"></i>
-                                    {{ label_case($provider->provider) }}
-                                </li>
-                            @empty
-                                {{ __('No social profile added!') }}
-                            @endforelse
-                        </div>
-                    </div>
-                </div>
 
+                @php
+                    // Assuming you have a variable or method to check user roles
+                    $userHasResidentRole = in_array('resident', $userRoles);
+                @endphp
                 @can('edit_users_permissions')
-                    <div class="form-group row mb-3">
-                        {{ html()->label(__('Abilities'))->class('col-sm-2 form-label') }}
-                        <div class="col">
-                            <div class="row">
-                                <div class="col-sm-6 mb-3">
-                                    <div class="card card-accent-primary">
-                                        <div class="card-header">
-                                            @lang('Roles')
-                                        </div>
-                                        <div class="card-body">
-                                            @if ($roles->count())
-                                                @foreach ($roles as $role)
-                                                    <div class="card mb-3">
-                                                        <div class="card-header">
-                                                            <div class="checkbox">
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input"
-                                                                        id="{{ 'role-' . $role->id }}" name="roles[]"
-                                                                        type="checkbox" value="{{ $role->name }}"
-                                                                        {{ in_array($role->name, $userRoles) ? 'checked' : '' }}>
-                                                                    <label class="form-check-label"
-                                                                        for="{{ 'role-' . $role->id }}">
-                                                                        {{ label_case($role->name) . ' (' . $role->name . ')' }}
-                                                                    </label>
+                    @if ($userHasResidentRole)
+                        <div class="form-group row mb-3">
+                            {{ html()->hidden('roles[]', 'resident') }}
+                        </div>
+                    @else
+                        <div class="form-group row mb-3">
+                            {{ html()->label(__('Abilities'))->class('col-sm-2 form-label') }}
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-sm-6 mb-3">
+                                        <div class="card card-accent-primary">
+                                            <div class="card-header">
+                                                @lang('Roles')
+                                            </div>
+                                            <div class="card-body">
+                                                @if ($roles->count())
+                                                    @foreach ($roles as $role)
+                                                        <div class="card mb-3">
+                                                            <div class="card-header">
+                                                                <div class="checkbox">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input"
+                                                                            id="{{ 'role-' . $role->id }}" name="roles[]"
+                                                                            type="checkbox" value="{{ $role->name }}"
+                                                                            {{ in_array($role->name, $userRoles) ? 'checked' : '' }}>
+                                                                        <label class="form-check-label"
+                                                                            for="{{ 'role-' . $role->id }}">
+                                                                            {{ label_case($role->name) . ' (' . $role->name . ')' }}
+                                                                        </label>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            @if ($role->id != 1)
-                                                                @if ($role->permissions->count())
-                                                                    @foreach ($role->permissions as $permission)
-                                                                        <i
-                                                                            class="far fa-check-circle fa-fw mr-1"></i>&nbsp;{{ $permission->name }}&nbsp;
-                                                                    @endforeach
+                                                            <div class="card-body">
+                                                                @if ($role->id != 1)
+                                                                    @if ($role->permissions->count())
+                                                                        @foreach ($role->permissions as $permission)
+                                                                            <i
+                                                                                class="far fa-check-circle fa-fw mr-1"></i>&nbsp;{{ $permission->name }}&nbsp;
+                                                                        @endforeach
+                                                                    @else
+                                                                        @lang('None')
+                                                                    @endif
                                                                 @else
-                                                                    @lang('None')
+                                                                    @lang('All Permissions')
                                                                 @endif
-                                                            @else
-                                                                @lang('All Permissions')
-                                                            @endif
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                @endforeach
-                                            @endif
+                                                    @endforeach
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-6 mb-3">
-                                    <div class="card card-accent-info">
-                                        <div class="card-header">
-                                            @lang('Permissions')
-                                        </div>
-                                        <div class="card-body">
-                                            @if ($permissions->count())
-                                                @foreach ($permissions as $permission)
-                                                    <div class="mb-2">
-                                                        <input class="form-check-input"
-                                                            id="{{ 'permission-' . $permission->id }}" name="permissions[]"
-                                                            type="checkbox" value="{{ $permission->name }}"
-                                                            {{ in_array($permission->name, $userPermissions) ? 'checked' : '' }}>
-                                                        <label class="form-check-label"
-                                                            for="{{ 'permission-' . $permission->id }}">
-                                                            {{ label_case($permission->name) . ' (' . $permission->name . ')' }}
-                                                        </label>
-                                                    </div>
-                                                @endforeach
-                                            @endif
+                                    <div class="col-sm-6 mb-3">
+                                        <div class="card card-accent-info">
+                                            <div class="card-header">
+                                                @lang('Permissions')
+                                            </div>
+                                            <div class="card-body">
+                                                @if ($permissions->count())
+                                                    @foreach ($permissions as $permission)
+                                                        <div class="mb-2">
+                                                            <input class="form-check-input"
+                                                                id="{{ 'permission-' . $permission->id }}" name="permissions[]"
+                                                                type="checkbox" value="{{ $permission->name }}"
+                                                                {{ in_array($permission->name, $userPermissions) ? 'checked' : '' }}>
+                                                            <label class="form-check-label"
+                                                                for="{{ 'permission-' . $permission->id }}">
+                                                                {{ label_case($permission->name) . ' (' . $permission->name . ')' }}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @endcan
 
                 <div class="row">
