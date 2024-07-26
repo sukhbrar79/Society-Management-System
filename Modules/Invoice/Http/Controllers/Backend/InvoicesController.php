@@ -79,4 +79,39 @@ class InvoicesController extends BackendBaseController
             ->make(true);
     }
 
+    /**
+     * Store a new resource in the database.
+     *
+     * @param  Request  $request  The request object containing the data to be stored.
+     * @return RedirectResponse The response object that redirects to the index page of the module.
+     *
+     * @throws Exception If there is an error during the creation of the resource.
+     */
+    public function store(Request $request)
+    {
+        $module_title = $this->module_title;
+        $module_name = $this->module_name;
+        $module_path = $this->module_path;
+        $module_icon = $this->module_icon;
+        $module_model = $this->module_model;
+        $module_name_singular = Str::singular($module_name);
+
+        $module_action = 'Store';
+
+        $validated = $request->validate([
+            'resident_id' => 'required|exists:users,id',
+            'amount' => 'required|numeric|min:0',
+            'invoice_date' => 'required|date',
+            'due_date' => 'required|date',           
+        ]);
+
+        $$module_name_singular = $module_model::factory()->create(array_merge($validated, ['status' => 'pending']));
+
+        flash("New '".Str::singular($module_title)."' Added")->success()->important();
+
+        logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
+
+        return redirect("admin/{$module_name}");
+    }
+
 }
