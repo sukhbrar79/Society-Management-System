@@ -63,7 +63,7 @@ class FlatsController extends BackendBaseController
             })
             ->editColumn('name', '<strong>{{$name}}</strong>')
             ->editColumn('block_id', function ($data) {
-                return $data->block->name;
+                return $data->block?->name;
             })
             ->editColumn('updated_at', function ($data) {
                 $module_name = $this->module_name;

@@ -76,16 +76,16 @@ class ComplaintsController extends BackendBaseController
                 return view('backend.includes.action_column', compact('module_name', 'data'));
             })
             ->editColumn('user_id', function ($data) {
-                return $data->user->name;
+                return $data->user?->name;
             })
             ->editColumn('flat_id', function ($data) {
-                return $data->flat->name;
+                return $data->flat?->name;
             })
             ->editColumn('status', function ($data) {
                 return $data->status->displayName();
             })
             ->editColumn('block_id', function ($data) {
-                return $data->block->name;
+                return $data->block?->name;
             })
             ->editColumn('assigned_to', function ($data) {
                 return $data->staff?->name ?? '-';
