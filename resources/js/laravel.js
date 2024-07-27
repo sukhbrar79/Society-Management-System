@@ -16,7 +16,7 @@ Exemples :
         },
 
         registerEvents: function () {
-            this.methodLinks.on('click', this.handleMethod);
+            $(document).on('click','[data-confirm]', this.handleMethod);
         },
 
         handleMethod: function (e) {

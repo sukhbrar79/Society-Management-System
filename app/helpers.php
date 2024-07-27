@@ -112,10 +112,10 @@ if (!function_exists('show_column_value')) {
             return \App\Models\User::getUserNameById($value);
         }
         if (in_array($column_name, ['flat_id'])) {
-            return \Modules\Flat\Models\Flat::find($value)->name;
+            return \Modules\Flat\Models\Flat::find($value)?->name;
         }
         if (in_array($column_name, ['block_id'])) {
-            return \Modules\Block\Models\Block::find($value)->name;
+            return \Modules\Block\Models\Block::find($value)?->name;
         }
 
 

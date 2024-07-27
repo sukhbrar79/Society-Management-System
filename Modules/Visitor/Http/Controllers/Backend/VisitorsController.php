@@ -62,9 +62,9 @@ class VisitorsController extends BackendBaseController
 
                 return view('backend.includes.action_column', compact('module_name', 'data'));
             })
-            ->editColumn('resident_id', function($data){ return $data->user->name;})
-            ->editColumn('flat_id', function($data){ return $data->flat->name;})
-            ->editColumn('block_id', function($data){ return $data->block->name;})
+            ->editColumn('resident_id', function($data){ return $data->user?->name;})
+            ->editColumn('flat_id', function($data){ return $data->flat?->name;})
+            ->editColumn('block_id', function($data){ return $data->block?->name;})
             ->editColumn('updated_at', function ($data) {
                 $module_name = $this->module_name;
 
