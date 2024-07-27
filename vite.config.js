@@ -11,6 +11,8 @@ export default defineConfig({
 
                 'resources/sass/app-backend.scss',
                 'resources/js/app-backend.js',
+                'resources/js/backend-custom.js',
+                'resources/css/backend-custom.css',
             ],
             // refresh: true,
             refresh: [
