@@ -3,6 +3,7 @@
 return [
 
     'invoice_number' => 'Invoice Number',
+    'name' => 'Name',
     'user' => 'Resident',
     'amount' => 'Amount',
     'invoice_date' => 'Invoice Date',

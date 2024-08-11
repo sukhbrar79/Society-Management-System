@@ -33,11 +33,13 @@ class InvoiceFactory extends Factory
         })->pluck('id')->toArray();
 
         return [
+            'name' => 'Maintenance Bill',
+            'description' => $this->faker->paragraph,
             'invoice_number' => $this->faker->unique()->numerify('INV####'), // Example format for invoice number
             'resident_id' => $this->faker->randomElement($userIds), // Assuming you have a Resident model and factory
             'amount' => $this->faker->randomFloat(2, 50, 1000), // Random amount between 50 and 1000 with 2 decimal places
-            'invoice_date' => $this->faker->date(),
-            'due_date' => $this->faker->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
+            'invoice_date' => Carbon::now()->format('Y-m-d'),
+            'due_date' => Carbon::now()->addDays(rand(1, 365))->format('Y-m-d'),
             'status' => $this->faker->randomElement(['Pending', 'Paid', 'Overdue']),
             'created_by' => $this->faker->randomElement($managerIds), // Assuming you have a User model and factory
             'updated_by' => $this->faker->randomElement($managerIds), // Assuming you have a User model and factory

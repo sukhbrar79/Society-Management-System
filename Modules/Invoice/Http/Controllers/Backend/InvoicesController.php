@@ -51,7 +51,7 @@ class InvoicesController extends BackendBaseController
         $page_heading = label_case($module_title);
         $title = $page_heading . ' ' . label_case($module_action);
 
-        $$module_name = $module_model::select('id','invoice_number','resident_id','amount','invoice_date','due_date','status', 'updated_at');
+        $$module_name = $module_model::select('id','name','invoice_number','resident_id','amount','invoice_date','due_date','status', 'updated_at');
 
         $data = $$module_name;
         return Datatables::of($$module_name)
