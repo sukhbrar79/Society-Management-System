@@ -55,6 +55,9 @@
                                 @lang("invoice::text.invoice_number")
                             </th>
                             <th>
+                                @lang("invoice::text.name")
+                            </th>
+                            <th>
                                 @lang("invoice::text.user")
                             </th>
                             <th>
@@ -121,6 +124,10 @@
             {
                 data: 'invoice_number',
                 name: 'invoice_number'
+            },
+            {
+                data: 'name',
+                name: 'name'
             },
             {
                 data: 'resident_id',

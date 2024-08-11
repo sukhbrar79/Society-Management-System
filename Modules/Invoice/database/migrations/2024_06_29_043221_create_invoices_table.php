@@ -17,6 +17,8 @@ return new class extends Migration
 
             $table->bigIncrements('id');
             $table->string('invoice_number', 50);
+            $table->string('name', 50)->default('Maintenance Bill');
+            $table->text('description');
             $table->unsignedBigInteger('resident_id');
             $table->decimal('amount', 10, 2);
             $table->date('invoice_date');
