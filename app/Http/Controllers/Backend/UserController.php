@@ -305,11 +305,12 @@ class UserController extends Controller
         $data_array['name'] = $request->first_name . ' ' . $request->last_name;
         $data_array['password'] = Hash::make($request->password);
 
-        if ($request->confirmed === 1) {
-            $data_array = Arr::add($data_array, 'email_verified_at', Carbon::now());
-        } else {
-            $data_array = Arr::add($data_array, 'email_verified_at', null);
-        }
+        // if ($request->confirmed === 1) {
+        //     $data_array = Arr::add($data_array, 'email_verified_at', Carbon::now());
+        // } else {
+        //     $data_array = Arr::add($data_array, 'email_verified_at', null);
+        // }
+        $data_array = Arr::add($data_array, 'email_verified_at', Carbon::now());
         $data_array['flat_id'] = $request->flat_id ?? '';
         $data_array['block_id'] = $request->block_id ?? '';
 

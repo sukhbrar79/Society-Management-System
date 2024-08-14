@@ -18,9 +18,7 @@ class NoticeBoardResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'status' => $this->status,
-            'expiry_date' => $this->expiry_date ? $this->expiry_date->toDateString() : null,
-            'created_at' => $this->created_at ? $this->created_at->toDateString() : null,
+            'status' => $this->status
         ];
     }
 }
