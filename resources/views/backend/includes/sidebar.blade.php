@@ -63,7 +63,7 @@ $notifications_latest = optional($notifications)->take(5);
         @php
             $module_name = "complaints";
             $text = __('Residents Complaints');
-            $icon = "fa-regular fa-sticky-note";
+            $icon = "fa-regular fa-c";
             $permission = "view_".$module_name;
             $url = route('backend.'.$module_name.'.index');
         @endphp
@@ -72,7 +72,7 @@ $notifications_latest = optional($notifications)->take(5);
         @php
             $module_name = "invoices";
             $text = __('Maintenance Invoices');
-            $icon = "fa-regular fa-file-lines";
+            $icon = "fa-regular fa-i";
             $permission = "view_".$module_name;
             $url = route('backend.'.$module_name.'.index');
         @endphp
@@ -81,7 +81,7 @@ $notifications_latest = optional($notifications)->take(5);
         @php
             $module_name = "emergencycontacts";
             $text = __('Emergency Contacts');
-            $icon = "fa-regular fa-file-lines";
+            $icon = "fa-regular fa-e";
             $permission = "view_".$module_name;
             $url = route('backend.'.$module_name.'.index');
         @endphp
@@ -90,7 +90,7 @@ $notifications_latest = optional($notifications)->take(5);
         @php
             $module_name = "parkings";
             $text = __('Parkings');
-            $icon = "fa-regular fa-taxi";
+            $icon = "fa-regular fa-p";
             $permission = "view_".$module_name;
             $url = route('backend.'.$module_name.'.index');
         @endphp
@@ -100,7 +100,7 @@ $notifications_latest = optional($notifications)->take(5);
         @php
             $module_name = "visitors";
             $text = __('Visitors');
-            $icon = "fa-regular fa-file-lines";
+            $icon = "fa-regular fa-v";
             $permission = "view_".$module_name;
             $url = route('backend.'.$module_name.'.index');
         @endphp
@@ -109,7 +109,7 @@ $notifications_latest = optional($notifications)->take(5);
         @php
             $module_name = "noticeboards";
             $text = __('Notice Board');
-            $icon = "fa-regular fa-file-lines";
+            $icon = "fa-regular fa-n";
             $permission = "view_".$module_name;
             $url = route('backend.'.$module_name.'.index');
         @endphp

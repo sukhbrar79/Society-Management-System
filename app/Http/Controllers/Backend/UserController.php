@@ -304,6 +304,7 @@ class UserController extends Controller
 
         $data_array['name'] = $request->first_name . ' ' . $request->last_name;
         $data_array['password'] = Hash::make($request->password);
+        $data_array['mobile'] = $request->mobile;
 
         // if ($request->confirmed === 1) {
         //     $data_array = Arr::add($data_array, 'email_verified_at', Carbon::now());
@@ -524,6 +525,7 @@ class UserController extends Controller
             'email' => 'required|email:rfc,dns|regex:/(.+)@(.+)\.(.+)/i|max:191|unique:users,email,' . $id,
             'roles' => 'nullable|array',
             'permissions' => 'nullable|array',
+            'mobile'=>'nullable'
         ]);
 
         $validated_data['name'] = $validated_data['first_name'] . ' ' . $validated_data['last_name'];
