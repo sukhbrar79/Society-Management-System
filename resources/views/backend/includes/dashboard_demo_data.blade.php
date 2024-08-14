@@ -9,7 +9,7 @@
                     <?php $progress = ($totalComplaints > 0) ? (25) : (0); ?>
                     <div class="progress-bar bg-success" role="progressbar" style="width: {{ $progress }}%" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <small class="text-medium-emphasis">Widget helper text</small>
+                <!-- <small class="text-medium-emphasis">Widget helper text</small> -->
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
                     <?php $progress = ($totalComplaints > 0) ? (25) : (0); ?>
                     <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $progress }}%" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <small class="text-medium-emphasis">Widget helper text</small>
+                <!-- <small class="text-medium-emphasis">Widget helper text</small> -->
             </div>
         </div>
     </div>
@@ -36,7 +36,7 @@
                     <?php $progress = ($totalComplaints > 0) ? (25) : (0); ?>
                     <div class="progress-bar bg-info" role="progressbar" style="width: {{ $progress }}%" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <small class="text-medium-emphasis">Widget helper text</small>
+                <!-- <small class="text-medium-emphasis">Widget helper text</small> -->
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
                     <?php $progress = ($totalComplaints > 0) ? (25) : (0); ?>
                     <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $progress }}%" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <small class="text-medium-emphasis">Widget helper text</small>
+                <!-- <small class="text-medium-emphasis">Widget helper text</small> -->
             </div>
         </div>
     </div>
@@ -66,7 +66,7 @@
                     <?php $progress = ($totalResidents > 0) ? (25) : (0); ?>
                     <div class="progress-bar" role="progressbar" style="width: {{ $progress }}%" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <small class="text-medium-emphasis-inverse">Widget helper text</small>
+                <!-- <small class="text-medium-emphasis-inverse">Widget helper text</small> -->
             </div>
         </div>
     </div>
@@ -80,7 +80,7 @@
                     <?php $progress = ($freeParkings > 0) ? (25) : (0); ?>
                     <div class="progress-bar" role="progressbar" style="width: {{ $progress }}%" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <small class="text-medium-emphasis-inverse">Widget helper text</small>
+                <!-- <small class="text-medium-emphasis-inverse">Widget helper text</small> -->
             </div>
         </div>
     </div>
@@ -94,7 +94,7 @@
                     <?php $progress = ($pendingInvoices > 0) ? (25) : (0); ?>
                     <div class="progress-bar" role="progressbar" style="width: {{ $progress }}%" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <small class="text-medium-emphasis-inverse">Widget helper text</small>
+                <!-- <small class="text-medium-emphasis-inverse">Widget helper text</small> -->
             </div>
         </div>
     </div>
@@ -108,13 +108,13 @@
                     <?php $progress = ($overdueInvoices > 0) ? (25) : (0); ?>
                     <div class="progress-bar" role="progressbar" style="width: {{ $progress }}%" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <small class="text-medium-emphasis-inverse">Widget helper text</small>
+                <!-- <small class="text-medium-emphasis-inverse">Widget helper text</small> -->
             </div>
         </div>
     </div>
 </div>
 
-<div class="card mb-4">
+<!-- <div class="card mb-4">
     <div class="card-body">
         <div class="d-flex justify-content-between">
             <div class="align-self-center">
@@ -129,5 +129,5 @@
         <hr>
         <!-- Dashboard Content Area -->
         <!-- / Dashboard Content Area -->
-    </div>
-</div>
+    <!-- </div> -->
+<!-- </div>  -->

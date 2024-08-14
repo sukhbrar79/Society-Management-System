@@ -13,17 +13,10 @@
         <x-backend.section-header>
             @lang("Dashboard")
 
-            <x-slot name="toolbar">
-                <button class="btn btn-outline-primary mb-1" type="button" data-toggle="tooltip" data-coreui-placement="top" title="Tooltip">
-                    <i class="fa-solid fa-bullhorn"></i>
-                </button>
-            </x-slot>
+            
         </x-backend.section-header>
 
-        <!-- Dashboard Content Area -->
         
-        <!-- / Dashboard Content Area -->
-
     </div>
 </div>
 
