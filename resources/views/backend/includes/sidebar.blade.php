@@ -114,6 +114,15 @@ $notifications_latest = optional($notifications)->take(5);
             $url = route('backend.'.$module_name.'.index');
         @endphp
         <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
+
+        @php
+            $module_name = "guidelines";
+            $text = __('Guidelines');
+            $icon = "fa-regular fa-g";
+            $permission = "view_".$module_name;
+            $url = route('backend.'.$module_name.'.index');
+        @endphp
+        <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
         
         @php
             $module_name = "settings";

@@ -1,0 +1,13 @@
+{
+    "name": "Guideline",
+    "alias": "guideline",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Guideline\\Providers\\GuidelineServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

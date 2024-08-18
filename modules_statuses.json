@@ -6,5 +6,6 @@
     "NoticeBoard": true,
     "Block": true,
     "Flat": true,
-    "EmergencyContact": true
+    "EmergencyContact": true,
+    "Guideline": true
 }
