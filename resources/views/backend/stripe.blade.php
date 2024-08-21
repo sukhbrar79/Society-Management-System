@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="card mt-5">
-                    <h3 class="card-header p-3">TMS</h3>
+                    <h3 class="card-header p-3">Sociotech</h3>
                     <div class="card-body">
                         @if (session('success'))
                             <div class="alert alert-success">
@@ -60,7 +60,7 @@
 
 <script src="https://js.stripe.com/v3/"></script>
 <script type="text/javascript">
-    var stripe = Stripe('{{ env('STRIPE_KEY') }}')
+    var stripe = Stripe("{{ config('services.stripe.STRIPE_KEY') }}");
     var elements = stripe.elements();
     var cardElement = elements.create('card');
     cardElement.mount('#card-element');

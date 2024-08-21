@@ -17,13 +17,9 @@ class StripePaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function stripe(Request $request, $invoice_id): View
+    public function stripe(Request $request, $invoice_id)
     {
         $invoice = Invoice::find($invoice_id);
-        if (empty($invoice)) {
-            return response()->json(['errors' => 'invoice not found'], 422);
-        }
-
         return view('backend.stripe', compact('invoice'));
     }
 
@@ -32,16 +28,16 @@ class StripePaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function stripePost(Request $request): RedirectResponse
+    public function stripePost(Request $request)
     {
         try {
-            Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+            Stripe\Stripe::setApiKey(config('services.stripe.STRIPE_SECRET'));
 
             $response = Stripe\Charge::create([
                 'amount' => 10 * 100,
                 'currency' => 'usd',
                 'source' => $request->stripeToken,
-                'description' => 'Test payment from itsolutionstuff.com.',
+                'description' => 'Payment for invoice #'.$request->invoice_id,
             ]);
 
             if ($response['status'] == 'succeeded') {
@@ -50,14 +46,18 @@ class StripePaymentController extends Controller
                 $invoice->transaction = json_encode($response);
                 $invoice->save();
                 session()->flash('success', 'Payment successful!');
+                return redirect("stripe/".$request->invoice_id."?success=true");
             } else {
                 session()->flash('error', 'Something went wrong');
+                return redirect("stripe/".$request->invoice_id."?error=true");
             }
         } catch (InvalidRequestException $e) {
             session()->flash('error', 'The Stripe token has already been used. Please refresh the page and try again with a new token.');
+            return redirect("stripe/".$request->invoice_id."?error=true");
         } catch (\Exception $e) {
+            echo $e->getMessage();die;
             session()->flash('error', 'An error occurred while processing the payment. Please try again later.');
+            return redirect("stripe/".$request->invoice_id."?error=true");
         }
-        return redirect()->back();
     }
 }
