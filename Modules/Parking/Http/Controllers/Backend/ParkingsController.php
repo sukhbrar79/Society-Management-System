@@ -71,6 +71,9 @@ class ParkingsController extends BackendBaseController
             ->addColumn('expiration_date', function ($data) {
                 return $data->activeAllocation?->expiration_date ?? '-';
             })
+            ->addColumn('status', function ($data) {
+                return $data->activeAllocation?->status ?? '-';
+            })
             ->editColumn('updated_at', function ($data) {
                 $module_name = $this->module_name;
 
@@ -133,13 +136,24 @@ class ParkingsController extends BackendBaseController
         $module_name_singular = Str::singular($module_name);
 
         $module_action = 'Store';
-
-        $$module_name_singular = $module_model::create($request->all());
-        ParkingAllocation::create($request->all());
+        $$module_name_singular = $module_model::findOrFail($request->get('parking_id'));
+        ParkingAllocation::firstOrCreate(
+            [
+                'parking_id' => $request->get('parking_id'),
+                'resident_id' => $request->get('resident_id'),
+                'status' => 'Active',
+                // Add any other unique fields you want to match on
+            ],
+            [
+                'block_id' =>$request->get('block_id'),
+                'flat_id' =>$request->get('flat_id'),
+                'allocation_date' =>$request->get('allocation_date'),
+                'expiration_date' =>$request->get('expiration_date'),
+                'status' =>$request->get('status'),
+            ]
+        );
 
         flash("New '".Str::singular($module_title)."' Added")->success()->important();
-
-        logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
 
         return redirect("admin/{$module_name}");
     }
@@ -166,15 +180,25 @@ class ParkingsController extends BackendBaseController
 
         $module_action = 'Update';
 
-        $$module_name_singular = $module_model::findOrFail($id);
-
-        $$module_name_singular->update($request->all());
+        $parkingAllocation = ParkingAllocation::firstOrCreate(
+            [
+                'parking_id' => $request->get('parking_id'),
+                'resident_id' => $request->get('resident_id'),
+                'status' => 'Active',
+                // Add any other unique fields you want to match on
+            ],
+            [
+                'block_id' =>$request->get('block_id'),
+                'flat_id' =>$request->get('flat_id'),
+                'allocation_date' =>$request->get('allocation_date'),
+                'expiration_date' =>$request->get('expiration_date'),
+                'status' =>$request->get('status'),
+            ]
+        );
 
         flash(Str::singular($module_title)."' Updated Successfully")->success()->important();
 
-        logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
-
-        return redirect()->route("backend.{$module_name}.requests.show", $$module_name_singular->id);
+        return redirect("admin/{$module_name}");
     }
 
 }
