@@ -141,7 +141,6 @@ class ParkingsController extends BackendBaseController
             [
                 'parking_id' => $request->get('parking_id'),
                 'resident_id' => $request->get('resident_id'),
-                'status' => 'Active',
                 // Add any other unique fields you want to match on
             ],
             [
@@ -184,7 +183,6 @@ class ParkingsController extends BackendBaseController
             [
                 'parking_id' => $request->get('parking_id'),
                 'resident_id' => $request->get('resident_id'),
-                'status' => 'Active',
                 // Add any other unique fields you want to match on
             ],
             [
