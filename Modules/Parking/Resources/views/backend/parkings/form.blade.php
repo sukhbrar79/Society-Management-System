@@ -5,6 +5,8 @@ $residents = \App\Models\User::whereHas('roles', function($query) {
     $query->where('name', 'resident');
 })->pluck('name', 'id')->toArray();
 $blocks = \Modules\Block\Models\Block::pluck('name', 'id')->toArray();
+$flats = \Modules\Flat\Models\Flat::pluck('name', 'id')->toArray();
+
 ?>
 
 <div class="row">
@@ -17,9 +19,10 @@ $blocks = \Modules\Block\Models\Block::pluck('name', 'id')->toArray();
             $required = "required";
             ?>
             {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->select($field_name, $parkings)->placeholder($field_placeholder)->class('form-control select2')->attributes([$required]) }}
+            {{ html()->select($field_name, $parkings)->value($data['id']??'')->placeholder($field_placeholder)->class('form-control select2')->attributes([$required]) }}
         </div>
     </div>
+    
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
@@ -29,7 +32,7 @@ $blocks = \Modules\Block\Models\Block::pluck('name', 'id')->toArray();
             $required = "required";
             ?>
             {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->select($field_name, $residents)->placeholder($field_placeholder)->class('form-control select2')->attributes([$required]) }}
+            {{ html()->select($field_name, $residents)->value($data['resident_id']??'')->placeholder($field_placeholder)->class('form-control select2')->attributes([$required]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -41,7 +44,7 @@ $blocks = \Modules\Block\Models\Block::pluck('name', 'id')->toArray();
             $required = "";
             ?>
             {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->select($field_name, $blocks)->placeholder($field_placeholder)->class('form-control select2')->attributes([$required, 'id' => 'block_id']) }}
+            {{ html()->select($field_name, $blocks)->value($data['block_id']??'')->placeholder($field_placeholder)->class('form-control select2')->attributes([$required, 'id' => 'block_id']) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -53,7 +56,7 @@ $blocks = \Modules\Block\Models\Block::pluck('name', 'id')->toArray();
             $required = "";
             ?>
             {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->select($field_name, [])->placeholder($field_placeholder)->class('form-control select2')->attributes([$required, 'id' => 'flat_id']) }}
+            {{ html()->select($field_name, $flats)->value($data['flat_id']??'')->placeholder($field_placeholder)->class('form-control select2')->attributes([$required, 'id' => 'flat_id']) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">

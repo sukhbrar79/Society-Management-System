@@ -63,6 +63,9 @@ class InvoicesController extends BackendBaseController
             ->addColumn('resident_id', function ($data) {
                 return $data->user?->name ?? '-';;
             })
+            ->editColumn('due_date', function ($data) {
+                return $data?->due_date?->isoFormat('YYYY-MM-DD')?? '-';;
+            })
             ->editColumn('updated_at', function ($data) {
                 $module_name = $this->module_name;
 
