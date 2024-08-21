@@ -70,6 +70,9 @@
                                 @lang("parking::text.expiration_date")
                             </th>
                             <th>
+                                @lang("parking::text.is_occupied")
+                            </th>
+                            <th>
                                 @lang("parking::text.updated_at")
                             </th>
                             <th class="text-end">
@@ -136,6 +139,9 @@
             },{
                 data: 'expiration_date',
                 name: 'expiration_date'
+            },{
+                data: 'status',
+                name: 'status'
             },
             {
                 data: 'updated_at',

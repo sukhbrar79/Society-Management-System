@@ -6,6 +6,7 @@ $residents = \App\Models\User::whereHas('roles', function($query) {
 })->pluck('name', 'id')->toArray();
 $blocks = \Modules\Block\Models\Block::pluck('name', 'id')->toArray();
 $flats = \Modules\Flat\Models\Flat::pluck('name', 'id')->toArray();
+$activeAllocation=$data->activeAllocation;
 
 ?>
 
@@ -32,7 +33,7 @@ $flats = \Modules\Flat\Models\Flat::pluck('name', 'id')->toArray();
             $required = "required";
             ?>
             {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->select($field_name, $residents)->value($data['resident_id']??'')->placeholder($field_placeholder)->class('form-control select2')->attributes([$required]) }}
+            {{ html()->select($field_name, $residents)->value($activeAllocation['resident_id']??'')->placeholder($field_placeholder)->class('form-control select2')->attributes([$required]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -44,7 +45,7 @@ $flats = \Modules\Flat\Models\Flat::pluck('name', 'id')->toArray();
             $required = "";
             ?>
             {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->select($field_name, $blocks)->value($data['block_id']??'')->placeholder($field_placeholder)->class('form-control select2')->attributes([$required, 'id' => 'block_id']) }}
+            {{ html()->select($field_name, $blocks)->value($activeAllocation['block_id']??'')->placeholder($field_placeholder)->class('form-control select2')->attributes([$required, 'id' => 'block_id']) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -56,7 +57,7 @@ $flats = \Modules\Flat\Models\Flat::pluck('name', 'id')->toArray();
             $required = "";
             ?>
             {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->select($field_name, $flats)->value($data['flat_id']??'')->placeholder($field_placeholder)->class('form-control select2')->attributes([$required, 'id' => 'flat_id']) }}
+            {{ html()->select($field_name, $flats)->value($activeAllocation['flat_id']??'')->placeholder($field_placeholder)->class('form-control select2')->attributes([$required, 'id' => 'flat_id']) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -68,7 +69,7 @@ $flats = \Modules\Flat\Models\Flat::pluck('name', 'id')->toArray();
             $required = "";
             ?>
             {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->date($field_name)->placeholder($field_placeholder)->class('form-control')->attributes([$required]) }}
+            {{ html()->date($field_name)->value($activeAllocation['allocation_date']??'')->placeholder($field_placeholder)->class('form-control')->attributes([$required]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -80,7 +81,7 @@ $flats = \Modules\Flat\Models\Flat::pluck('name', 'id')->toArray();
             $required = "";
             ?>
             {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->date($field_name)->placeholder($field_placeholder)->class('form-control')->attributes([$required]) }}
+            {{ html()->date($field_name)->value($activeAllocation['expiration_date']??'')->placeholder($field_placeholder)->class('form-control')->attributes([$required]) }}
         </div>
     </div>
     <div class="col-12 col-sm-4 mb-3">
@@ -100,7 +101,7 @@ $flats = \Modules\Flat\Models\Flat::pluck('name', 'id')->toArray();
             ];
             ?>
             {{ html()->label($field_label, $field_name)->class('form-label') }} {!! field_required($required) !!}
-            {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes([$required]) }}
+            {{ html()->select($field_name, $select_options)->value($activeAllocation['status']??'')->placeholder($field_placeholder)->class('form-control select2')->attributes([$required]) }}
         </div>
     </div>
 </div>

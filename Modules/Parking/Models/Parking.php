@@ -27,7 +27,8 @@ class Parking extends BaseModel
 
     public function activeAllocation()
     {
-        return $this->hasOne(ParkingAllocation::class,'parking_id', 'id');
+        return $this->hasOne(ParkingAllocation::class, 'parking_id', 'id')
+                ->whereIn('status', ['Active','Upcoming','Pending','Approved'])->latest('id');
     }
 
     public function ParkingRequest()
