@@ -137,7 +137,7 @@ class ParkingsController extends BackendBaseController
 
         $module_action = 'Store';
         $$module_name_singular = $module_model::findOrFail($request->get('parking_id'));
-        ParkingAllocation::firstOrCreate(
+        ParkingAllocation::updateOrCreate(
             [
                 'parking_id' => $request->get('parking_id'),
                 'resident_id' => $request->get('resident_id'),
@@ -179,7 +179,7 @@ class ParkingsController extends BackendBaseController
 
         $module_action = 'Update';
 
-        $parkingAllocation = ParkingAllocation::firstOrCreate(
+        $parkingAllocation = ParkingAllocation::updateOrCreate(
             [
                 'parking_id' => $request->get('parking_id'),
                 'resident_id' => $request->get('resident_id'),
