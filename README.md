@@ -1,18 +1,11 @@
 # Society Management System
 
-This project is a **comprehensive Society Management System** designed to streamline the management of residential societies by providing an integrated solution for handling complaints, visitor records, parking, flats, users, and much more. The system is powered by **Laravel** for the backend, **Vue.js** for the frontend, and provides APIs for seamless integration with mobile applications.
-
----
-
-## Implementation
-
-This chapter details the implementation of all features in the society management system, including backend and frontend components, as well as API integration. The implementation fulfills objectives 4, 5, and 6.
-
+This project is a **comprehensive Society Management System** designed to streamline the management of residential societies by providing an integrated solution for handling complaints, visitor records, parking, flats, users, and much more. ** Laravel ** powers the system for the backend, and provides APIs for seamless integration with mobile applications.
 ---
 
 ### API Implementation
 
-To connect the mobile app with the backend system, APIs were built using the **Laravel Passport** package ([documentation](https://laravel.com/docs/11.x/passport)). Passport was chosen for its full OAuth2 server implementation, ensuring secure API authentication through access tokens. 
+APIs were built using the **Laravel Passport** package to connect the mobile app with the backend system ([documentation](https://laravel.com/docs/11.x/passport)). Passport was chosen for its full OAuth2 server implementation, ensuring secure API authentication through access tokens. 
 
 For API documentation and testing, a **Postman Workspace** was created, helping to document and test APIs efficiently.
 
@@ -125,9 +118,6 @@ APIs handle the following functionalities:
 ### Backend
 - **Laravel**: For backend logic and API development.
 
-### Frontend
-- **Vue.js**: For dynamic and responsive user interfaces.
-
 ### Database
 - **MySQL**: For storing all data related to residents, flats, complaints, parking, and more.
 
@@ -146,27 +136,21 @@ APIs handle the following functionalities:
    git clone https://github.com/yourusername/society-management-system.git
 2. Navigate to the project directory:
    ```bash
-    cd appointment-booking-system
+    cd society-management-system
    
 3. Install backend dependencies:
    ```bash
     composer install
    
-4. Install frontend dependencies:
-    ```bash
-    npm install
-5. Configure the .env file with your database and application settings.
+4. Configure the .env file with your database and application settings.
 
-6. Generate the application key:
+5. Generate the application key:
     ```bash
     php artisan key:generate
     
-7. Run migrations to create the database tables:
+6. Run migrations to create the database tables:
     ```bash
     php artisan migrate
-8. Build frontend assets:
-    ```bash
-    npm run dev
-9. Start the development server:
+7. Start the development server:
     ```bash
     php artisan serve
