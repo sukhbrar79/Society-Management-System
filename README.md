@@ -1,7 +1,7 @@
 # Society Management System
 
-This project is a **comprehensive Society Management System** designed to streamline the management of residential societies by providing an integrated solution for handling complaints, visitor records, parking, flats, users, and much more. ** Laravel ** powers the system for the backend, and provides APIs for seamless integration with mobile applications.
----
+**This project is a **comprehensive Society Management System** designed to streamline the management of residential societies by providing an integrated solution for handling complaints, visitor records, parking, flats, users, and much more. ** Laravel ** powers the system for the backend, and provides APIs for seamless integration with mobile applications.
+**---
 
 ### API Implementation
 
